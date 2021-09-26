@@ -1,11 +1,11 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const nombresRutas = require('../resources/routes');
+const Rutas = require('../resources/routes');
 const restauranteService = require('../app/services/RestauranteService');
 
 router.get(
-    nombresRutas.empty,
+    Rutas.empty,
     async (request, response) => {
         try {
             const restaurantes = await restauranteService.getRestaurantes(request, response);
@@ -18,8 +18,21 @@ router.get(
     }
 );
 
+router.get(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const restaurante = await restauranteService.getRestaurante(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(restaurante));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+)
+
 router.post(
-    nombresRutas.empty,
+    Rutas.empty,
     async (request, response) => {
         try {
             const newRestaurante = await restauranteService.createRestaurante(request, response);
@@ -31,4 +44,29 @@ router.post(
     }
 );
 
+router.delete(
+    Rutas.id,
+    async (request, response) => {
+        try {
+          const result = await restauranteService.deleteRestaurante(request, response);
+          response.set('Content-type', 'application/json');
+          response.status(200).send(result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+);
+
+router.put(
+    Rutas.id,
+    async (request, response) => {
+        try {
+           const result = await restauranteService.actualizarRestaurante(request, response);
+           response.set('Content-type', 'application/json');
+           response.status(200).send(result); 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
 module.exports = router;
