@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const nombresRutas = require('./resources/routes');
 const cors = require('cors');
 const restaurantes = require('./routes/restaurantes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocumento = require('./config/swagger.json'); 
 const ROUTE_URL = '/api';
 
 class Application {
@@ -12,6 +14,7 @@ class Application {
         this.setUpCors();
         this.setUpExpress();
         this.setUpRoutes();
+        this.setUpSwagger();
         this.setUpNotFoundRoute();
         this.setUpPort();
     }
@@ -35,6 +38,10 @@ class Application {
             error.status = 404;
             next(error);
         });
+    }
+
+    setUpSwagger() {
+        this.express.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumento));
     }
 
     setUpCors() {
