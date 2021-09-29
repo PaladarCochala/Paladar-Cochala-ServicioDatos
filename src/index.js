@@ -1,10 +1,5 @@
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
-app.listen(5000, () => {
-    console.log('Server on port 5000');
-});
+'use strict';
+const application = require('./Application');
+application.listen(application.get('port'), () => {
+    console.log(`La API esta corriendo en el puerto ${application.get('port')}`);
+    });
