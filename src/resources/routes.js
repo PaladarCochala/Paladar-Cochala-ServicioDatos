@@ -5,5 +5,8 @@ module.exports = {
     id: '/:id',
     restaurantes: {
         url: '/restaurantes'
+    },
+    usuarios: {
+        url: '/usuarios'
     }
 };

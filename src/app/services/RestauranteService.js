@@ -30,7 +30,7 @@ const RestauranteService = {
                 ...request.body
             });
             const result = {
-                message: 'Restaurant created successfully',
+                message: 'El restaurante fue creado exitosamente',
                 response: newRestaurante
             };
             return result;
