@@ -5,9 +5,7 @@ const RestauranteService = {
     getRestaurantes: async (request, response) => {
         try {
             let restaurantes = await Restaurante.findAll({
-                raw: true,
-                nest: true,
-       
+                include: ['comentarios']
             });
             return { response: restaurantes };
         } catch (error) {
@@ -17,7 +15,9 @@ const RestauranteService = {
 
     getRestaurante: async (request, response) => {
         try {
-            let restaurante = await Restaurante.findByPk(request.params.id);
+            let restaurante = await Restaurante.findByPk(request.params.id, {
+                include: ['comentarios']
+            });
             return { response: restaurante};
         } catch (error) {
             throw error;
@@ -26,9 +26,7 @@ const RestauranteService = {
 
     createRestaurante: async (request, response) => {
         try {
-            const newRestaurante = await Restaurante.create({
-                ...request.body
-            });
+            const newRestaurante = await Restaurante.create(request.body);
             const result = {
                 message: 'El restaurante fue creado exitosamente',
                 response: newRestaurante

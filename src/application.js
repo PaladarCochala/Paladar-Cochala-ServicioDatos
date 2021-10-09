@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const nombresRutas = require('./resources/routes');
 const cors = require('cors');
 const restaurantes = require('./routes/restaurantes');
+const comentarios = require('./routes/comentarios')
 const usuarios = require('./routes/usuarios');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocumento = require('./config/swagger.json'); 
@@ -23,6 +24,7 @@ class Application {
     setUpRoutes() {
         this.express.use(ROUTE_URL + nombresRutas.restaurantes.url, restaurantes);
         this.express.use(ROUTE_URL + nombresRutas.usuarios.url, usuarios);
+        this.express.use(ROUTE_URL + nombresRutas.comentarios.url, comentarios);
     }
 
     setUpExpress() {

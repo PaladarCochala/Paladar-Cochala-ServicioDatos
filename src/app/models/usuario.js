@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Restaurante = sequelize.define('Usuario', {
+    const Usuario = sequelize.define('Usuario', {
       'id': {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       'contadorComentario': DataTypes.INTEGER,
       'imagenPerfil': DataTypes.STRING,
     }, {});
-    Restaurante.associate = function(models){
+    Usuario.associate = function(models){
         
     };
-    return Restaurante;
+    return Usuario;
 }

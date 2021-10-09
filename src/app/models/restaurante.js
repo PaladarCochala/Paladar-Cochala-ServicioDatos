@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       'ubicacion': DataTypes.STRING,
       'promedioSabor': DataTypes.FLOAT,
       'promedioServicio': DataTypes.FLOAT,
-      'logo': DataTypes.STRING,
-    }, {});
+      'logo': DataTypes.STRING
+    });
     Restaurante.associate = function(models){
-        
+        Restaurante.hasMany(models.Comentarios, {as: 'comentarios'});
     };
     return Restaurante;
 }

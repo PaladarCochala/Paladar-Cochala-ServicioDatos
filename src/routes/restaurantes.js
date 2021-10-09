@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Rutas = require('../resources/routes');
 const restauranteService = require('../app/services/RestauranteService');
+const comentarioService = require('../app/services/ComentarioService');
 
 router.get(
     Rutas.empty,
@@ -56,7 +57,26 @@ router.delete(
         }
     }
 );
-
+router.delete(
+    '/comentarios/:id',
+    async(request, response) => {
+    try {
+        const result = await comentarioService.deleteComentario(request, response);
+        response.status(200).send(result);
+    } catch (error) {
+        console.log(error);
+    }
+});
+router.put(
+    '/comentarios/:id',
+    async(request, response) => {
+    try {
+        const result = await comentarioService.actualizarComentario(request, response);
+        response.status(200).send(result);
+    } catch (error) {
+        console.log(error);
+    }
+});
 router.put(
     Rutas.id,
     async (request, response) => {
