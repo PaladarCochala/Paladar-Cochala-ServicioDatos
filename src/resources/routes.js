@@ -8,5 +8,8 @@ module.exports = {
     },
     usuarios: {
         url: '/usuarios'
+    },
+    comentarios:{
+        url: '/comentarios'
     }
 };
