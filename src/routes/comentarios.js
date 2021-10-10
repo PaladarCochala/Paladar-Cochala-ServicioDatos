@@ -8,7 +8,6 @@ router.get(
     Rutas.empty,
     async (request, response) => {
         try {
-            console.log("hola perro")
             const comentarios = await comentarioService.getComentarios(request, response);
             response.send(comentarios)
         }
@@ -17,19 +16,6 @@ router.get(
         }
     }
 );
-
-/*router.get(
-    Rutas.id,
-    async (request, response) => {
-        try {
-            const comentario = await comentarioService.getComentario(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(comentario));
-        } catch (error) {
-            response.status(404).send(error);
-        }
-    }
-)*/
 
 router.post(
     Rutas.empty,

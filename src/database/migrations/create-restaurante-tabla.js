@@ -28,6 +28,14 @@ module.exports = {
             logo: {
                 type: Sequelize.STRING,
                 allowNull: true
+            },
+            fechaDeCreacion: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            contadorDeResenias: {
+                type: Sequelize.INTEGER,
+                allowNull: true
             }
         })
     },

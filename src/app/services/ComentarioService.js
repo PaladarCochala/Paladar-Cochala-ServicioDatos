@@ -5,7 +5,6 @@ const ComentarioService = {
 
     getComentarios: async (request, response) => {
         try {
-            console.log('hola')
             let comentarios = await Comentarios.findAll({
                 include: {
                     model: Restaurante,
