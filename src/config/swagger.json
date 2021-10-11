@@ -1,0 +1,192 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "PALADAR COCHALO API",
+        "description": "PALADAR COCHALO API"
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Restaurante",
+            "description": "API para los restaurantes del sistema"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/restaurantes": {
+            "get": {
+                "tags": [
+                    "Restaurante"
+                ],
+                "summary": "Obtener toda la informacion de los restaurantes",
+                "description": "Obtener toda la informacion de los restaurantes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurante"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Restaurante"
+                ],
+                "summary": "Crear un nuevo restaurante",
+                "description": "Crear un nuevo restaurante",
+                "parameters": [
+                    {
+                        "name": "Nuevo Restaurante",
+                        "in": "body",
+                        "description": "Toda la informacion de un restaurante",
+                        "schema": {
+                            "$ref": "#/definitions/RestauranteSinId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El restaurante fue creado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurante"
+                        }
+                    }
+                }
+            }
+        },
+        "/restaurantes/{id}": {
+            "get": {
+                "tags": [
+                    "Restaurante"
+                ],
+                "summary": "Muestra un restaurante en especifico",
+                "description": "Muestra un restaurante en especifico por el ID del URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del restaurante",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El restaurante existe",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurante"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Restaurante"
+                ],
+                "summary": "Editar toda la informacion de un restaurante especifico",
+                "description": "Editar toda la informacion de un restaurante especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del Restaurante",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Datos nuevos para Restaurante a editar",
+                        "in": "body",
+                        "description": "Toda la informacion de un restaurante",
+                        "schema": {
+                            "$ref": "#/definitions/RestauranteSinId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El restaurante fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurante"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Restaurante"
+                ],
+                "summary": "Elimina un restaurante en especifico",
+                "description": "Elimina un restaurante en especifco por el ID en el URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del Restaurante",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El restaurante fue eliminado exitosamente"
+                    }
+                }
+            }
+        }
+    },   
+    "definitions": {
+        "Restaurante": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "ubicacion": {
+                    "type": "string"
+                },
+                "promedioSabor": {
+                    "type": "number"
+                },
+                "promedioServicio": {
+                    "type": "number"
+                },
+                "logo": {
+                    "type": "string"
+                }
+            }
+        },
+        "RestauranteSinId": {
+            "properties": {
+                "nombre": {
+                    "type": "string"
+                },
+                "ubicacion": {
+                    "type": "string"
+                },
+                "promedioSabor": {
+                    "type": "number"
+                },
+                "promedioServicio": {
+                    "type": "number"
+                },
+                "logo": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
