@@ -5,7 +5,10 @@ const RestauranteService = {
     getRestaurantes: async (request, response) => {
         try {
             let restaurantes = await Restaurante.findAll({
-                include: ['comentarios']
+                include: ['comentarios'],
+                order: [
+                    ['id', 'ASC']
+                ]
             });
             return { response: restaurantes };
         } catch (error) {
