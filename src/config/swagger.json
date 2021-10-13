@@ -11,6 +11,10 @@
         {
             "name": "Restaurante",
             "description": "API para los restaurantes del sistema"
+        },
+        {
+            "name": "Comentario",
+            "description": "API para los comentarios del sistema"
         }
     ],
     "schemes": [
@@ -143,6 +147,78 @@
                     }
                 }
             }
+        },
+        "/comentarios": {
+            "get": {
+                "tags": [
+                    "Comentario"
+                ],
+                "summary": "Obtener toda la informacion de los comentarios",
+                "description": "Obtener toda la informacion de los comentarios",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Comentario"
+                        }
+                    }
+                }
+            }
+        },
+        "/comentarios/{id}": {
+            "put": {
+                "tags": [
+                    "Comentario"
+                ],
+                "summary": "Editar toda la informacion de un comentario especifico",
+                "description": "Editar toda la informacion de un comentario en especifco por el ID en el URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del Comentario",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Datos nuevos para el Comentario a editar",
+                        "in": "body",
+                        "description": "Toda la informacion de un Comentario",
+                        "schema": {
+                            "$ref": "#/definitions/ComentarioSinId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El Comentario fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Comentario"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comentario"
+                ],
+                "summary": "Elimina un comentario en especifico",
+                "description": "Elimina un comentario en especifco por el ID en el URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del comentario",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El comentario fue eliminado exitosamente"
+                    }
+                }
+            }
         }
     },   
     "definitions": {
@@ -185,6 +261,30 @@
                 },
                 "logo": {
                     "type": "string"
+                }
+            }
+        },
+        "Comentario": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "descripcion": {
+                    "type": "string"
+                },
+                "RestauranteId": {
+                    "type": "number"
+                }
+            }
+        },
+        "ComentarioSinId": {
+            "properties": {
+                "descripcion": {
+                    "type": "string"
+                },
+                "RestauranteId": {
+                    "type": "number"
                 }
             }
         }
