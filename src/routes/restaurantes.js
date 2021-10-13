@@ -24,7 +24,6 @@ router.get(
     "/:nombre",
     async (request, response) => {
         try {
-            console.log("hola")
             const restaurante = await restauranteService.getRestaurantePorNombre(request, response);
             response.set('Content-type', 'application/json');
             response.status(200).end(JSON.stringify(restaurante));
