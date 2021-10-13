@@ -4,6 +4,7 @@ const router = express.Router();
 const Rutas = require('../resources/routes');
 const restauranteService = require('../app/services/RestauranteService');
 const comentarioService = require('../app/services/ComentarioService');
+const { Router } = require('express');
 
 router.get(
     Rutas.empty,
@@ -20,6 +21,21 @@ router.get(
 );
 
 router.get(
+    "/:nombre",
+    async (request, response) => {
+        try {
+            console.log("hola")
+            const restaurante = await restauranteService.getRestaurantePorNombre(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(restaurante));
+
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+);
+
+router.get(
     Rutas.id,
     async (request, response) => {
         try {
@@ -30,7 +46,8 @@ router.get(
             response.status(404).send(error);
         }
     }
-)
+);
+
 
 router.post(
     Rutas.empty,

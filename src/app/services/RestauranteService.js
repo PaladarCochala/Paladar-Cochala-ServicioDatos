@@ -18,6 +18,7 @@ const RestauranteService = {
 
     getRestaurante: async (request, response) => {
         try {
+            
             let restaurante = await Restaurante.findByPk(request.params.id, {
                 include: ['comentarios']
             });
@@ -26,7 +27,17 @@ const RestauranteService = {
             throw error;
         }
     },
-
+    getRestaurantePorNombre: async (request, response) => {
+        try {
+            let restaurante = await Restaurante.findAll({
+                where: {nombre: request.params.nombre},
+                include: ['comentarios']
+            });
+            return { response: restaurante};
+        } catch (error) {
+            throw error;
+        }
+    },
     createRestaurante: async (request, response) => {
         try {
             const newRestaurante = await Restaurante.create(request.body);
