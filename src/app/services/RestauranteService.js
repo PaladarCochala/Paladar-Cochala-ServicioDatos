@@ -1,7 +1,6 @@
 const { Restaurante } = require('../models');
 const RestauranteService = {
 
-
     getRestaurantes: async (request, response) => {
         try {
             let restaurantes = await Restaurante.findAll({

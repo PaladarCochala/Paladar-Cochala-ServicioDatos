@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
       'ubicacion': DataTypes.STRING,
       'promedioSabor': DataTypes.FLOAT,
       'promedioServicio': DataTypes.FLOAT,
-      'logo': DataTypes.STRING
+      'fechaCreacion': DataTypes.DATE,
+      'logo': DataTypes.STRING,
+      'contadorDeComentarios': DataTypes.INTEGER
     });
     Restaurante.associate = function(models){
         Restaurante.hasMany(models.Comentarios, {as: 'comentarios'});

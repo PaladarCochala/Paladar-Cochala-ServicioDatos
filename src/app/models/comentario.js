@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true
       },
       'descripcion': DataTypes.STRING,
+      'fechaDePublicacion': DataTypes.DATE,
       'RestauranteId': DataTypes.INTEGER
     });
     Comentarios.associate = function(models){

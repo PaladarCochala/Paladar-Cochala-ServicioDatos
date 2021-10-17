@@ -10,8 +10,8 @@ module.exports = {
                 promedioSabor: 5,
                 promedioServicio: 3,
                 logo: null,
-                fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Panchita',
@@ -19,8 +19,8 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Pollos Chester',
@@ -28,8 +28,8 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Pizza OverTime',
@@ -37,8 +37,8 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                fechaDeCreacion:'2021-10-01T18:25:43.511Z',
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Pizza Villa Esperanza',
@@ -46,8 +46,8 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Cafe Capresso',
@@ -56,7 +56,7 @@ module.exports = {
                 promedioServicio: 4,
                 logo: null,
                 fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Salteñeria Castores',
@@ -65,7 +65,7 @@ module.exports = {
                 promedioServicio: 4,
                 logo: null,
                 fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Wistupikus',
@@ -74,7 +74,7 @@ module.exports = {
                 promedioServicio: 4,
                 logo: null,
                 fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Pizzeria Elis',
@@ -83,7 +83,7 @@ module.exports = {
                 promedioServicio: 4,
                 logo: null,
                 fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                contadorDeComentarios:  0,
             },
             {
                 nombre: 'Planchitas Originales',
@@ -92,7 +92,7 @@ module.exports = {
                 promedioServicio: 4,
                 logo: null,
                 fechaDeCreacion: null,
-                contadorDeResenias:  0,
+                contadorDeComentarios:  0,
             }
         ]);
     },

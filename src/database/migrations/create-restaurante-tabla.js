@@ -30,10 +30,10 @@ module.exports = {
                 allowNull: true
             },
             fechaDeCreacion: {
-                type: Sequelize.STRING,
+                type: Sequelize.DATE,
                 allowNull: true
             },
-            contadorDeResenias: {
+            contadorDeComentarios: {
                 type: Sequelize.INTEGER,
                 allowNull: true
             }
