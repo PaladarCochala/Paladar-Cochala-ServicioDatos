@@ -13,7 +13,11 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
-            RestauranteId: {
+            fechaDePublicacion:{
+                type: Sequelize.DATE,
+                allowNull: true
+            }, 
+            restauranteId: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             }

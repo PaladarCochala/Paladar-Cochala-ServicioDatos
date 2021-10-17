@@ -10,7 +10,7 @@ module.exports = {
                 promedioSabor: 5,
                 promedioServicio: 3,
                 logo: null,
-                fechaDeCreacion: null,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
                 contadorDeResenias:  0,
             },
             {
@@ -19,7 +19,7 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
                 contadorDeResenias:  0,
             },
             {
@@ -28,7 +28,7 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
                 contadorDeResenias:  0,
             },
             {
@@ -37,7 +37,7 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
+                fechaDeCreacion:'2021-10-01T18:25:43.511Z',
                 contadorDeResenias:  0,
             },
             {
@@ -46,7 +46,7 @@ module.exports = {
                 promedioSabor: 2.5,
                 promedioServicio: 4,
                 logo: null,
-                fechaDeCreacion: null,
+                fechaDeCreacion: '2021-10-01T18:25:43.511Z',
                 contadorDeResenias:  0,
             },
             {
