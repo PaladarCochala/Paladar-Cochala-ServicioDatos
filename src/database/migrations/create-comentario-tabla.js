@@ -14,8 +14,8 @@ module.exports = {
                 allowNull: false
             },
             fechaDePublicacion:{
-                type: Sequelize.DATE,
-                allowNull: true
+                type: Sequelize.DATEONLY,
+                allowNull: false
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
