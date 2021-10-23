@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-    const Comentarios = sequelize.define('Comentarios', {
+    const Comentario = sequelize.define('Comentarios', {
       'id': {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
       },
       'descripcion': DataTypes.STRING,
       'fechaDePublicacion': DataTypes.DATE,
-      'RestauranteId': DataTypes.INTEGER
+      'restauranteId': DataTypes.INTEGER
+    },
+    {
+      timestamps: false
     });
-    Comentarios.associate = function(models){
-        Comentarios.belongsTo(models.Restaurante,  {foreignKey: 'RestauranteId', as: 'restaurante'});
-    };
-    return Comentarios;
+
+    return Comentario;
 }
