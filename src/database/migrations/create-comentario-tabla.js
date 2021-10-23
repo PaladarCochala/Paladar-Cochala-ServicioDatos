@@ -20,6 +20,10 @@ module.exports = {
             restauranteId: {
                 type: Sequelize.INTEGER,
                 allowNull: false
+            },
+            nombreUsuario: {
+                type: Sequelize.STRING,
+                allowNull: false
             }
         })
     },

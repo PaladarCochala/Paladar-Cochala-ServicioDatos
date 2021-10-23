@@ -30,7 +30,7 @@ router.post(
         }
     }
 );
-   
+
 // api/restaurantes/:id
 router.get(
     Rutas.id,
@@ -45,4 +45,29 @@ router.get(
     }
 );
 
+router.delete(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const contadorRestauranteEliminado = await restauranteService.eliminarRestaurante(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(contadorRestauranteEliminado));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+)
+
+router.put(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const restauranteActualizado = await restauranteService.actualizarRestaurante(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(restauranteActualizado));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+)
 module.exports = router;
