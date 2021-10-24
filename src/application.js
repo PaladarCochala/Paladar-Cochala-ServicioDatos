@@ -52,7 +52,6 @@ class Application {
     setUpCors() {
         this.express.use(cors());
     }
-
 }
 
 module.exports = new Application().express;

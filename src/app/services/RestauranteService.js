@@ -56,11 +56,12 @@ const RestauranteService = {
                 where: {
                     id
                 }
-            })
+            });
             if (contadorRestaurenteEliminado != 0) {
                 return { 
                     message: 'Restaurante borrado satisfactoriamente', 
-                    count: contadorRestaurenteEliminado };
+                    count: contadorRestaurenteEliminado 
+                };
             } else {
                 response.status(404).json({
                     message: "No se encontro el restaurante"
@@ -80,12 +81,13 @@ const RestauranteService = {
                 where: {
                     id
                 }
-            })
+            });
             if(contadorRestauranteActualizado != 0)
             {
                 return { 
                     message: 'Restaurante Actualizado satisfactoriamente', 
-                    count: contadorRestauranteActualizado };
+                    count: contadorRestauranteActualizado 
+                };
             }else{
                 response.status(404).json({
                     message: "No se encontro el restaurante"

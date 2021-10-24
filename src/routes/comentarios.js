@@ -45,4 +45,30 @@ router.get(
     }
 );
 
+router.delete(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const contadorComentarioEliminado = await comentarioService.eliminarComentario(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(contadorComentarioEliminado));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+);
+
+router.put(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const contadorComentarioActualizado = await comentarioService.actualizarComentario(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(contadorComentarioActualizado));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+);
+
 module.exports = router;

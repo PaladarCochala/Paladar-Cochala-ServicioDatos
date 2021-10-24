@@ -47,6 +47,56 @@ const ComentarioService = {
                 message: "Algo salio mal con el Servidor"
             });
         }
+    },
+
+    eliminarComentario: async (request, response) => {
+        try {
+            const { id } = request.params;
+            const contadorComentarioEliminado = await Comentario.destroy({
+                where: {
+                    id
+                }
+            });
+            if (contadorComentarioEliminado != 0) {
+                return {
+                    message: 'Comentario borrado satisfactoriamente',
+                    count: contadorComentarioEliminado
+                };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el comentario"
+                });
+            }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
+    actualizarComentario: async (request, response) => {
+        try {
+            const { id } = request.params;
+            const contadorComentarioActualizado = await Comentario.update(request.body, {
+                where: {
+                    id
+                }
+            });
+            if (contadorComentarioActualizado != 0) {
+                return {
+                    message: 'Comentaio Actualizado satisfactoriamente',
+                    count: contadorComentarioActualizado
+                };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el comentario"
+                });
+            }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
     }
 }
 module.exports = ComentarioService;

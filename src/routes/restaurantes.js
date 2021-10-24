@@ -62,9 +62,9 @@ router.put(
     Rutas.id,
     async (request, response) => {
         try {
-            const restauranteActualizado = await restauranteService.actualizarRestaurante(request, response);
+            const contadorRestauranteActualizado = await restauranteService.actualizarRestaurante(request, response);
             response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(restauranteActualizado));
+            response.status(200).end(JSON.stringify(contadorRestauranteActualizado));
         } catch (error) {
             response.status(404).send(error);
         }
