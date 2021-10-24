@@ -1,4 +1,3 @@
-const { response, request } = require('express');
 const { Usuario } = require('../models');
 
 const UsuarioService = {
@@ -82,12 +81,11 @@ const UsuarioService = {
                     id
                 }
             })
-            if(contadorUsuarioActualizado != 0)
-            {
+            if(contadorUsuarioActualizado != 0) {
                 return { 
                     message: 'Usuario Actualizado satisfactoriamente', 
                     count: contadorUsuarioActualizado };
-            }else{
+            } else {
                 response.status(404).json({
                     message: "No se encontro el usuario"
                 });

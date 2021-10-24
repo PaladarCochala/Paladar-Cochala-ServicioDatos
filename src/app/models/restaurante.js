@@ -20,5 +20,16 @@ module.exports = (sequelize, DataTypes) => {
       'urlPedidosYa': DataTypes.STRING,
       'estaActivo': DataTypes.BOOLEAN,
     }, {});
+
+    Restaurante.associate = function(models){
+      Restaurante.hasMany(models.Comentario, 
+        {
+          foreignKey: 'restauranteId',
+          constraints: false,
+          scope: {
+            commentable: 'restaurante'
+          }
+        });
+    };
     return Restaurante;
 }
