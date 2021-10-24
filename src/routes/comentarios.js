@@ -31,7 +31,7 @@ router.post(
     }
 );
 
-// api/restaurantes/:id
+// api/comentaios/:id
 router.get(
     Rutas.id,
     async (request, response) => {
@@ -71,4 +71,17 @@ router.put(
     }
 );
 
+// api/comentaios/restaurante/:restauranteId
+router.get(
+    '/restaurante/:restauranteId',
+    async (request, response) => {
+        try {
+            const comentarios = await comentarioService.obtenerComentariosPorRestaurante(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(comentarios));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+);
 module.exports = router;

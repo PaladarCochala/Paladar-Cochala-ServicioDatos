@@ -97,6 +97,21 @@ const ComentarioService = {
                 message: "Algo salio mal con el Servidor"
             });
         }
+    },
+
+    //Otros funciones para end-points
+    obtenerComentariosPorRestaurante: async (request, response) => {
+        try {
+            const { restauranteId } = request.params;
+            let comentarios = await Comentario.findAll({
+                where: { restauranteId }
+            });
+            return { comentarios };
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
     }
 }
 module.exports = ComentarioService;
