@@ -25,10 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       Restaurante.hasMany(models.Comentario, 
         {
           foreignKey: 'restauranteId',
-          constraints: false,
-          scope: {
-            commentable: 'restaurante'
-          }
+          constraints: false
         });
     };
     return Restaurante;

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     Comentario.associate = function(models){
       Comentario.belongsTo(models.Restaurante, 
         { 
-          foreingKey : 'restauranteId',
+          foreignKey : 'restauranteId',
           constraints: false,
           as: 'restaurante'
         });

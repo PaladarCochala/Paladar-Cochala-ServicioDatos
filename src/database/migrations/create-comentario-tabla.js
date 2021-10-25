@@ -19,7 +19,12 @@ module.exports = {
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: 'Restaurantes',
+                    key: 'id',
+                    as: 'restauranteId',
+                  }
             },
             nombreUsuario: {
                 type: Sequelize.STRING,

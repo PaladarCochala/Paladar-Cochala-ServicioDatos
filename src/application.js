@@ -7,7 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const nombresRutas = require('./resources/routes');
 const restauranteRoute = require('./routes/restaurantes');
 const comentarios = require('./routes/comentarios');
-const usuarioRoute = require('./routes/comentarios');
+const usuarioRoute = require('./routes/usuarios');
 const swaggerDocumento = require('./config/swagger.json'); 
 const ROUTE_URL = '/api';
 

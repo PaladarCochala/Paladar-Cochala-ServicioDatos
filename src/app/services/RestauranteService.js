@@ -1,4 +1,4 @@
-const { Restaurante } = require('../models');
+const { Restaurante, Comentario } = require('../models');
 
 const RestauranteService = {
     obtenerRestaurantes: async (request, response) => {
@@ -16,6 +16,7 @@ const RestauranteService = {
         try {
             const { id } = request.params;
             let restauranteBuscado = await Restaurante.findOne({
+                include: [{model: Comentario}],
                 where: {
                     id
                 }
