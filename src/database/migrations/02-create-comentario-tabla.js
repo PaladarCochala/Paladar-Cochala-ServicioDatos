@@ -19,12 +19,12 @@ module.exports = {
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
+                onDelete: 'CASCADE',
                 allowNull: false,
                 references: {
                     model: 'Restaurantes',
-                    key: 'id',
-                    as: 'restauranteId',
-                  }
+                    key: 'id'
+                }
             },
             nombreUsuario: {
                 type: Sequelize.STRING,
