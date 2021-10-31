@@ -17,10 +17,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            esAdmin: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false
-            },
             contrasenia: {
                 type: Sequelize.STRING,
                 allowNull: true
@@ -28,18 +24,22 @@ module.exports = {
             correo: {
                 type: Sequelize.STRING,
                 allowNull: true
-            },
-            estadoCuenta: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
+            },    
             contadorComentario: {
                 type: Sequelize.INTEGER,
                 allowNull: true
             },
-            imagenPerfil: {
+            urlImagenPerfil: {
                 type: Sequelize.STRING,
                 allowNull: true
+            },
+            esAdmin: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false
+            },
+            estaActivo: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false
             }
         })
     },
@@ -47,4 +47,4 @@ module.exports = {
     down: async(queryInterface, Sequelize) => {
         return queryInterface.dropTable('Usuarios');
     }
-}
+};

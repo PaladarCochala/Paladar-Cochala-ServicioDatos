@@ -18,24 +18,52 @@ module.exports = {
                 allowNull: true
             },
             promedioSabor: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DOUBLE,
                 allowNull: true
             },
             promedioServicio: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DOUBLE,
                 allowNull: true
             },
-            logo: {
+            urlLogo: {
                 type: Sequelize.STRING,
                 allowNull: true
             },
             fechaDeCreacion: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: true
             },
             contadorDeComentarios: {
                 type: Sequelize.INTEGER,
                 allowNull: true
+            },
+            rangoDePrecios: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            contacto: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            urlFacebook: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            urlInstagram: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            urlYoutube: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            urlPedidosYa: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            estaActivo: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false
             }
         })
     },
@@ -43,4 +71,4 @@ module.exports = {
     down: async(queryInterface, Sequelize) => {
         return queryInterface.dropTable('Restaurantes');
     }
-}
+};

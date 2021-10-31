@@ -1,65 +1,103 @@
-const { Restaurante } = require('../models');
+const { Restaurante, Comentario } = require('../models');
+
 const RestauranteService = {
-
-    getRestaurantes: async (request, response) => {
+    obtenerRestaurantes: async (request, response) => {
         try {
-            let restaurantes = await Restaurante.findAll({
-                include: ['comentarios'],
-                order: [
-                    ['id', 'ASC']
-                ]
-            });
-            return { response: restaurantes };
+            let restaurantes = await Restaurante.findAll();
+            return { response: restaurantes }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    getRestaurante: async (request, response) => {
+    obtenerUnRestaurante: async (request, response) => {
         try {
-            let restaurante = await Restaurante.findByPk(request.params.id, {
-                include: ['comentarios']
+            const { id } = request.params;
+            let restauranteBuscado = await Restaurante.findOne({
+                include: [{model: Comentario}],
+                where: {
+                    id
+                }
             });
-            return { response: restaurante};
+            if (restauranteBuscado) {
+                return { response: restauranteBuscado };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el restaurante"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    createRestaurante: async (request, response) => {
+    crearRestaurante: async (request, response) => {
         try {
-            const newRestaurante = await Restaurante.create(request.body);
+            const nuevoRestaurante = await Restaurante.create(request.body);
             const result = {
                 message: 'El restaurante fue creado exitosamente',
-                response: newRestaurante
+                response: nuevoRestaurante
             };
             return result;
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    deleteRestaurante: async (request, response) => {
+    eliminarRestaurante: async (request, response) => {
         try {
-            const restauranteEliminado = await Restaurante.destroy({
-                where: { id: request.params.id }
+            const { id } = request.params;
+            const contadorRestaurenteEliminado = await Restaurante.destroy({
+                where: {
+                    id
+                }
             });
-            return {
-                message: "El restaurante fue eliminado exitosamente",
-                result: restauranteEliminado
-            };
+            if (contadorRestaurenteEliminado != 0) {
+                return { 
+                    message: 'Restaurante borrado satisfactoriamente', 
+                    count: contadorRestaurenteEliminado 
+                };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el restaurante"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
+
     actualizarRestaurante: async (request, response) => {
         try {
-            await Restaurante.update(request.body, { where : {id: request.params.id } });
-            let restaurante = await Restaurante.findByPk(request.params.id);
-            return { message: "El restaurante fue actualizado", Restaurante : restaurante};
-
+            const { id } = request.params;
+            const contadorRestauranteActualizado = await Restaurante.update(request.body, {
+                where: {
+                    id
+                }
+            });
+            if(contadorRestauranteActualizado != 0)
+            {
+                return { 
+                    message: 'Restaurante Actualizado satisfactoriamente', 
+                    count: contadorRestauranteActualizado 
+                };
+            }else{
+                response.status(404).json({
+                    message: "No se encontro el restaurante"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     }
 }

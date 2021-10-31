@@ -6,33 +6,33 @@ module.exports = {
         [   
             {
                 nickname: 'Dai',
-                nombre: 'Augusto',
-                esAdmin: true,
+                nombre: 'Jose Augusto Valdez Calero',
                 contrasenia: 'daianser',
                 correo: 'dai@gmail.com',
-                estadoCuenta: 'visible',
-                contadorComentario: 5,
-                imagenPerfil: "link",
+                contadorComentario: 0,
+                urlImagenPerfil: null,
+                esAdmin: true,
+                estaActivo: true
             },
             {
                 nickname: 'Aedric',
-                nombre: 'Carlos',
-                esAdmin: false,
+                nombre: 'Carlos Edwin Vargas Sandoval',
                 contrasenia: 'minimo1',
                 correo: 'aedric@gmail.com',
-                estadoCuenta: 'visible',
-                contadorComentario: 5,
-                imagenPerfil: "link",
+                contadorComentario: 0,
+                urlImagenPerfil: null,
+                esAdmin: false,
+                estaActivo: true
             },
             {
                 nickname: 'SenseKarma',
-                nombre: 'Juanjo',
-                esAdmin: false,
+                nombre: 'Juan Jose Quiroga Gonzales',
                 contrasenia: 'minimo2',
                 correo: 'jj@gmail.com',
-                estadoCuenta: 'visible',
-                contadorComentario: 5,
-                imagenPerfil: "link",
+                contadorComentario: 0,
+                urlImagenPerfil: null,
+                esAdmin: false,
+                estaActivo: true
             }
         ]);
     },

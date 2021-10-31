@@ -14,11 +14,20 @@ module.exports = {
                 allowNull: false
             },
             fechaDePublicacion:{
-                type: Sequelize.DATE,
-                allowNull: true
+                type: Sequelize.DATEONLY,
+                allowNull: false
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
+                onDelete: 'CASCADE',
+                allowNull: false,
+                references: {
+                    model: 'Restaurantes',
+                    key: 'id'
+                }
+            },
+            nombreUsuario: {
+                type: Sequelize.STRING,
                 allowNull: false
             }
         })

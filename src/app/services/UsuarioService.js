@@ -1,65 +1,99 @@
 const { Usuario } = require('../models');
+
 const UsuarioService = {
-
-
-    getUsuarios: async (request, response) => {
+    obtenerUsuarios: async (request, response) => {
         try {
-            let usuarios = await Usuario.findAll({
-                raw: true,
-                nest: true,
-       
-            });
-            return { response: usuarios };
+            let usuarios = await Usuario.findAll();
+            return { response: usuarios }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    getUsuario: async (request, response) => {
+    obtenerUnUsuario: async (request, response) => {
         try {
-            let usuario = await Usuario.findByPk(request.params.id);
-            return { response: usuario};
+            const { id } = request.params;
+            let usuarioBuscado = await Usuario.findOne({
+                where: {
+                    id
+                }
+            });
+            if (usuarioBuscado) {
+                return { response: usuarioBuscado };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el usuario"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    createUsuario: async (request, response) => {
+    crearUsuario: async (request, response) => {
         try {
-            const newUsuario = await Usuario.create({
-                ...request.body
-            });
+            const nuevoUsuario = await Usuario.create(request.body);
             const result = {
                 message: 'El usuario fue creado exitosamente',
-                response: newUsuario
+                response: nuevoUsuario
             };
             return result;
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    deleteUsuario: async (request, response) => {
+    eliminarUsuario: async (request, response) => {
         try {
-            const usuarioEliminado = await Usuario.destroy({
-                where: { id: request.params.id }
-            });
-            return {
-                message: "El usuario fue eliminado exitosamente",
-                result: usuarioEliminado
-            };
+            const { id } = request.params;
+            const contadorRestaurenteEliminado = await Usuario.destroy({
+                where: {
+                    id
+                }
+            })
+            if (contadorRestaurenteEliminado != 0) {
+                return { 
+                    message: 'Usuario borrado satisfactoriamente', 
+                    count: contadorRestaurenteEliminado };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el usuario"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
+
     actualizarUsuario: async (request, response) => {
         try {
-            await Usuario.update(request.body, { where : {id: request.params.id } });
-            let usuario = await Usuario.findByPk(request.params.id);
-            return { message: "El usuario fue actualizado", Usuario : usuario};
-
+            const { id } = request.params;
+            const contadorUsuarioActualizado = await Usuario.update(request.body, {
+                where: {
+                    id
+                }
+            })
+            if(contadorUsuarioActualizado != 0) {
+                return { 
+                    message: 'Usuario Actualizado satisfactoriamente', 
+                    count: contadorUsuarioActualizado };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el usuario"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     }
 }

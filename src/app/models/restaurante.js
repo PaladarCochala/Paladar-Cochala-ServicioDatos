@@ -7,14 +7,26 @@ module.exports = (sequelize, DataTypes) => {
       },
       'nombre': DataTypes.STRING,
       'ubicacion': DataTypes.STRING,
-      'promedioSabor': DataTypes.FLOAT,
-      'promedioServicio': DataTypes.FLOAT,
-      'fechaCreacion': DataTypes.DATE,
-      'logo': DataTypes.STRING,
-      'contadorDeComentarios': DataTypes.INTEGER
-    });
+      'promedioSabor': DataTypes.DOUBLE,
+      'promedioServicio': DataTypes.DOUBLE,
+      'urlLogo': DataTypes.STRING,
+      'fechaDeCreacion': DataTypes.DATE,
+      'contadorDeComentarios': DataTypes.INTEGER,
+      'rangoDePrecios': DataTypes.STRING,
+      'contacto': DataTypes.STRING,
+      'urlFacebook': DataTypes.STRING,
+      'urlInstagram': DataTypes.STRING,
+      'urlYoutube': DataTypes.STRING,
+      'urlPedidosYa': DataTypes.STRING,
+      'estaActivo': DataTypes.BOOLEAN,
+    }, {});
+
     Restaurante.associate = function(models){
-        Restaurante.hasMany(models.Comentarios, {as: 'comentarios'});
+      Restaurante.hasMany(models.Comentario, 
+        {
+          foreignKey: 'restauranteId',
+          constraints: false
+        });
     };
     return Restaurante;
 }

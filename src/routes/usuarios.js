@@ -1,45 +1,46 @@
 'use strict';
-const express = require('express');
+const express = require('express')
 const router = express.Router();
 const Rutas = require('../resources/routes');
-const usuarioService = require('../app/services/UsuarioService');
+const usuarioService = require('../app/services/UsuarioService'); 
 
+// api/usuarios/
 router.get(
     Rutas.empty,
     async (request, response) => {
         try {
-            const usuario = await usuarioService.getUsuarios(request, response);
+            const usuarios = await usuarioService.obtenerUsuarios(request, response);
             response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(usuario));
-        }
-        catch (error) {
+            response.status(200).end(JSON.stringify(usuarios));
+        } catch (error) {
             response.status(404).send(error);
         }
     }
 );
 
-router.get(
-    Rutas.id,
-    async (request, response) => {
-        try {
-            const usuario = await usuarioService.getUsuario(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(usuario));
-        } catch (error) {
-            response.status(404).send(error);
-        }
-    }
-)
-
 router.post(
     Rutas.empty,
     async (request, response) => {
         try {
-            const newUsuario = await usuarioService.createUsuario(request, response);
+            const nuevoUsuario = await usuarioService.crearUsuario(request, response);
             response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(newUsuario));
+            response.status(200).end(JSON.stringify(nuevoUsuario));
         } catch (error) {
-            response.status(404).send('Error while creating Usuario');
+            response.status(404).send('Error en el proceso de creacion Usuario');
+        }
+    }
+);
+
+// api/usuarios/:id
+router.get(
+    Rutas.id,
+    async (request, response) => {
+        try {
+            const usuarioBuscado = await usuarioService.obtenerUnUsuario(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(usuarioBuscado));
+        } catch (error) {
+            response.status(404).send(error);
         }
     }
 );
@@ -48,24 +49,24 @@ router.delete(
     Rutas.id,
     async (request, response) => {
         try {
-          const result = await usuarioService.deleteUsuario(request, response);
-          response.set('Content-type', 'application/json');
-          response.status(200).send(result);
+            const contadorUsuarioEliminado = await usuarioService.eliminarUsuario(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(contadorUsuarioEliminado));
         } catch (error) {
-            console.log(error);
+            response.status(404).send(error);
         }
     }
-);
+)
 
 router.put(
     Rutas.id,
     async (request, response) => {
         try {
-           const result = await usuarioService.actualizarUsuario(request, response);
-           response.set('Content-type', 'application/json');
-           response.status(200).send(result); 
+            const usuarioActualizado = await usuarioService.actualizarUsuario(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(usuarioActualizado));
         } catch (error) {
-            console.log(error);
+            response.status(404).send(error);
         }
     }
 )

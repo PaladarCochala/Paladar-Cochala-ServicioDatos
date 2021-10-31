@@ -1,12 +1,13 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
-const nombresRutas = require('./resources/routes');
 const cors = require('cors');
-const restaurantes = require('./routes/restaurantes');
-const comentarios = require('./routes/comentarios')
-const usuarios = require('./routes/usuarios');
 const swaggerUi = require('swagger-ui-express');
+
+const nombresRutas = require('./resources/routes');
+const restauranteRoute = require('./routes/restaurantes');
+const comentarios = require('./routes/comentarios');
+const usuarioRoute = require('./routes/usuarios');
 const swaggerDocumento = require('./config/swagger.json'); 
 const ROUTE_URL = '/api';
 
@@ -22,8 +23,8 @@ class Application {
     }
 
     setUpRoutes() {
-        this.express.use(ROUTE_URL + nombresRutas.restaurantes.url, restaurantes);
-        this.express.use(ROUTE_URL + nombresRutas.usuarios.url, usuarios);
+        this.express.use(ROUTE_URL + nombresRutas.restaurantes.url, restauranteRoute);
+        this.express.use(ROUTE_URL + nombresRutas.usuarios.url, usuarioRoute);
         this.express.use(ROUTE_URL + nombresRutas.comentarios.url, comentarios);
     }
 
@@ -51,7 +52,6 @@ class Application {
     setUpCors() {
         this.express.use(cors());
     }
-
 }
 
 module.exports = new Application().express;

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Comentarios = sequelize.define('Comentarios', {
+    const Comentario = sequelize.define('Comentario', {
       'id': {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -7,10 +7,20 @@ module.exports = (sequelize, DataTypes) => {
       },
       'descripcion': DataTypes.STRING,
       'fechaDePublicacion': DataTypes.DATE,
-      'RestauranteId': DataTypes.INTEGER
+      'nombreUsuario': DataTypes.STRING,
+      'restauranteId': DataTypes.INTEGER
+    },
+    {
+      timestamps: false
     });
-    Comentarios.associate = function(models){
-        Comentarios.belongsTo(models.Restaurante,  {foreignKey: 'RestauranteId', as: 'restaurante'});
+
+    Comentario.associate = function(models){
+      Comentario.belongsTo(models.Restaurante, 
+        { 
+          foreignKey : 'restauranteId',
+          constraints: false,
+          as: 'restaurante'
+        });
     };
-    return Comentarios;
+    return Comentario;
 }

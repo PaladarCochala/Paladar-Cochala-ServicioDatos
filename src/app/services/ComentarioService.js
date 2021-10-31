@@ -1,64 +1,116 @@
-const nodemon = require('nodemon');
-const { Comentarios, Restaurante } = require('../models');
+const { Comentario } = require('../models');
+
 const ComentarioService = {
-
-
-    getComentarios: async (request, response) => {
+    obtenerComentarios: async (request, response) => {
         try {
-            let comentarios = await Comentarios.findAll({
-                include: {
-                    model: Restaurante,
-                    as: 'restaurante',
-                    attributes: {exclude: ['RestauranteId']}
-                }
-       
-            });
-            return { 'response': comentarios };
+            let comentarios = await Comentario.findAll();
+            return { response : comentarios }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: 'Algo salio mal con el Servidor'
+            });
         }
     },
-    encontrarComentariosPorRestaurante: async(parametros) => {
-        let todosLosComentarios = await Comentario.findAll({
-            where: parametros,
-            attributes: {exclude: 'RestauranteId'}
-        });
-        return { 'response': todosLosComentarios };
+
+    obtenerUnComentario: async (request, response) => {
+        try {
+            const { id } = request.params;
+            let comentarioBuscado = await Comentario.findOne({
+                where: {
+                    id
+                }
+            });
+            if (comentarioBuscado) {
+                return { response : comentarioBuscado };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el restaurante"
+                });
+            }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
     },
 
-    createComentario: async (request, response) => {
+    crearComentario: async (request, response) => {
         try {
-            const newComentario = await Comentarios.create(request.body);
+            const nuevoComentario = await Comentario.create(request.body);
             const result = {
-                message: 'El comentario fue creado exitosamente',
-                response: newComentario
+                message: 'El restaurante fue creado exitosamente',
+                response: nuevoComentario
             };
             return result;
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
 
-    deleteComentario: async (request, response) => {
+    eliminarComentario: async (request, response) => {
         try {
-            const comentarioEliminado = await Comentarios.destroy({
-                where: { id: request.params.id }
+            const { id } = request.params;
+            const contadorComentarioEliminado = await Comentario.destroy({
+                where: {
+                    id
+                }
             });
-            return {
-                message: "El comentario fue eliminado exitosamente",
-                result: comentarioEliminado
-            };
+            if (contadorComentarioEliminado != 0) {
+                return {
+                    message: 'Comentario borrado satisfactoriamente',
+                    count: contadorComentarioEliminado
+                };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el comentario"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     },
+
     actualizarComentario: async (request, response) => {
         try {
-            await Comentarios.update(request.body, { where : {id: request.params.id } });
-            let comentario = await Comentarios.findByPk(request.params.id);
-            return { message: "El comentario fue actualizado", Comentarios : comentario};
+            const { id } = request.params;
+            const contadorComentarioActualizado = await Comentario.update(request.body, {
+                where: {
+                    id
+                }
+            });
+            if (contadorComentarioActualizado != 0) {
+                return {
+                    message: 'Comentaio Actualizado satisfactoriamente',
+                    count: contadorComentarioActualizado
+                };
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el comentario"
+                });
+            }
         } catch (error) {
-            throw error;
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
+    //Otros funciones para end-points
+    obtenerComentariosPorRestaurante: async (request, response) => {
+        try {
+            const { restauranteId } = request.params;
+            let comentarios = await Comentario.findAll({
+                where: { restauranteId }
+            });
+            return { comentarios };
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
         }
     }
 }
