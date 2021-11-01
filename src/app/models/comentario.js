@@ -1,3 +1,4 @@
+const { Restaurante } = require('./restaurante');
 module.exports = (sequelize, DataTypes) => {
     const Comentario = sequelize.define('Comentario', {
       'id': {
@@ -11,7 +12,18 @@ module.exports = (sequelize, DataTypes) => {
       'restauranteId': DataTypes.INTEGER
     },
     {
-      timestamps: false
+      timestamps: false,
+
+      hooks: {
+        afterCreate: async function(comentario, options){
+          await sequelize.models.Restaurante.increment({ contadorDeComentarios : 1 },
+          {
+            where: {
+                id : comentario.restauranteId
+            }
+          });
+        }
+      }
     });
 
     Comentario.associate = function(models){
