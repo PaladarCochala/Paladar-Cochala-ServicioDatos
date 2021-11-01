@@ -1,4 +1,4 @@
-const { Comentario } = require('../models');
+const { Comentario, Restaurante } = require('../models');
 
 const ComentarioService = {
     obtenerComentarios: async (request, response) => {
@@ -41,6 +41,7 @@ const ComentarioService = {
                 message: 'El restaurante fue creado exitosamente',
                 response: nuevoComentario
             };
+            
             return result;
         } catch (error) {
             response.status(500).json({
