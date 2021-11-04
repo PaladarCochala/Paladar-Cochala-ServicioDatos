@@ -31,6 +31,20 @@ router.post(
     }
 );
 
+//Nuevos END-POINTS
+router.get(
+    Rutas.restaurantes.ultimos.url,
+    async (request, response) => {
+        try {
+            const ultimosRestaurantes = await restauranteService.obtenerUltimos5Restaurantes(request, response);
+            response.set('Content-type', 'application/json');
+            response.status(200).end(JSON.stringify(ultimosRestaurantes));
+        } catch (error) {
+            response.status(404).send(error);
+        }
+    }
+)
+
 // api/restaurantes/:id
 router.get(
     Rutas.id,
@@ -70,4 +84,6 @@ router.put(
         }
     }
 )
+
+
 module.exports = router;

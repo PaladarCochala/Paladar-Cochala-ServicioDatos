@@ -4,7 +4,10 @@ module.exports = {
     empty: '',
     id: '/:id',
     restaurantes: {
-        url: '/restaurantes'
+        url: '/restaurantes',
+        ultimos: {
+            url: '/ultimos'
+        }
     },
     usuarios: {
         url: '/usuarios'
