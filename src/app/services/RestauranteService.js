@@ -99,6 +99,21 @@ const RestauranteService = {
                 message: "Algo salio mal con el Servidor"
             });
         }
+    },
+
+    //Nuevos END-POINTS
+    obtenerUltimos5Restaurantes: async(require, response) => {
+        try {
+            let ultimosRestaurantes = await Restaurante.findAll({
+                limit: 5,
+                order: [['id', 'DESC']]
+            });
+            return { response: ultimosRestaurantes }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
     }
 }
 module.exports = RestauranteService;
