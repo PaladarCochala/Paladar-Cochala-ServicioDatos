@@ -3,6 +3,7 @@
 module.exports = {
     empty: '',
     id: '/:id',
+    email: '/:email',
     restaurantes: {
         url: '/restaurantes',
         ultimos: {

@@ -5,6 +5,7 @@ module.exports = {
         return queryInterface.bulkInsert('Usuarios', 
         [   
             {
+                email: 'DaiAnser@gmail.com',
                 nickname: 'Dai',
                 nombre: 'Jose Augusto Valdez Calero',
                 contrasenia: 'daianser',
@@ -15,6 +16,7 @@ module.exports = {
                 estaActivo: true
             },
             {
+                email: 'dragodes3@gmail.com',
                 nickname: 'Aedric',
                 nombre: 'Carlos Edwin Vargas Sandoval',
                 contrasenia: 'minimo1',
@@ -25,6 +27,7 @@ module.exports = {
                 estaActivo: true
             },
             {
+                email: 'SenseKarma@gmail.com',
                 nickname: 'SenseKarma',
                 nombre: 'Juan Jose Quiroga Gonzales',
                 contrasenia: 'minimo2',

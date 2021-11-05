@@ -31,9 +31,9 @@ router.post(
     }
 );
 
-// api/usuarios/:id
+// api/usuarios/:email
 router.get(
-    Rutas.id,
+    Rutas.email,
     async (request, response) => {
         try {
             const usuarioBuscado = await usuarioService.obtenerUnUsuario(request, response);
@@ -46,7 +46,7 @@ router.get(
 );
 
 router.delete(
-    Rutas.id,
+    Rutas.email,
     async (request, response) => {
         try {
             const contadorUsuarioEliminado = await usuarioService.eliminarUsuario(request, response);
@@ -59,7 +59,7 @@ router.delete(
 )
 
 router.put(
-    Rutas.id,
+    Rutas.email,
     async (request, response) => {
         try {
             const usuarioActualizado = await usuarioService.actualizarUsuario(request, response);

@@ -1,9 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define('Usuario', {
-      'id': {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      'email': {
+        type: DataTypes.STRING,
+        primaryKey: true
       },
       'nickname': DataTypes.STRING,
       'nombre': DataTypes.STRING,
@@ -17,5 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false
     });
+
+    Usuario.associate = function(models){
+      Usuario.hasMany(models.Comentario, 
+        {
+          foreignKey: 'emailUsuario',
+          constraints: false
+        });
+    };
     return Usuario;
 }

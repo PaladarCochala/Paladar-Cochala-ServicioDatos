@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       'descripcion': DataTypes.STRING,
       'fechaDePublicacion': DataTypes.DATE,
-      'nombreUsuario': DataTypes.STRING,
+      'emailUsuario': DataTypes.STRING,
       'restauranteId': DataTypes.INTEGER
     },
     {
@@ -32,6 +32,12 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey : 'restauranteId',
           constraints: false,
           as: 'restaurante'
+        });
+      Comentario.belongsTo(models.Usuario,
+        {
+          foreignKey : 'emailUsuario',
+          constraints : false,
+          as: 'usuario'
         });
     };
     return Comentario;

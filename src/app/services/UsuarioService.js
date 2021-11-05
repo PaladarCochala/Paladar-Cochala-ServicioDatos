@@ -1,4 +1,4 @@
-const { Usuario } = require('../models');
+const { Usuario, Comentario } = require('../models');
 
 const UsuarioService = {
     obtenerUsuarios: async (request, response) => {
@@ -14,10 +14,11 @@ const UsuarioService = {
 
     obtenerUnUsuario: async (request, response) => {
         try {
-            const { id } = request.params;
+            const { email } = request.params;
             let usuarioBuscado = await Usuario.findOne({
+                include: [{model: Comentario}],
                 where: {
-                    id
+                    email
                 }
             });
             if (usuarioBuscado) {
@@ -36,12 +37,25 @@ const UsuarioService = {
 
     crearUsuario: async (request, response) => {
         try {
-            const nuevoUsuario = await Usuario.create(request.body);
-            const result = {
-                message: 'El usuario fue creado exitosamente',
-                response: nuevoUsuario
-            };
-            return result;
+            const email = request.body.email
+            console.log(email)
+            const [nuevoUsuario, fueCreado] = await Usuario.findOrCreate({
+                where : {
+                    email
+                },
+                defaults: request.body   
+            });
+            console.log(fueCreado)
+            if (fueCreado) {
+                return {
+                    message: 'El usuario fue creado exitosamente',
+                    response: nuevoUsuario
+                };
+            } else {
+                response.status(200).json({
+                    message: "Ya existe ese usuario"
+                });
+            }   
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
@@ -51,10 +65,10 @@ const UsuarioService = {
 
     eliminarUsuario: async (request, response) => {
         try {
-            const { id } = request.params;
+            const { email } = request.params;
             const contadorRestaurenteEliminado = await Usuario.destroy({
                 where: {
-                    id
+                    email
                 }
             })
             if (contadorRestaurenteEliminado != 0) {
@@ -75,10 +89,10 @@ const UsuarioService = {
 
     actualizarUsuario: async (request, response) => {
         try {
-            const { id } = request.params;
+            const { email } = request.params;
             const contadorUsuarioActualizado = await Usuario.update(request.body, {
                 where: {
-                    id
+                    email
                 }
             })
             if(contadorUsuarioActualizado != 0) {
