@@ -3,10 +3,9 @@
 module.exports = {
     up: async(queryInterface, Sequelize) => {
         return queryInterface.createTable('Usuarios', {
-            id: {
-                type: Sequelize.INTEGER,
+            email: {
+                type: Sequelize.STRING,
                 primaryKey: true,
-                autoIncrement: true,
                 allowNull: false
             },
             nickname: {
@@ -21,10 +20,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            correo: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },    
             contadorComentario: {
                 type: Sequelize.INTEGER,
                 allowNull: true

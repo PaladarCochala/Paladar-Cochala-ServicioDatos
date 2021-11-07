@@ -26,9 +26,14 @@ module.exports = {
                     key: 'id'
                 }
             },
-            nombreUsuario: {
+            emailUsuario: {
                 type: Sequelize.STRING,
-                allowNull: false
+                onDelete: 'CASCADE',
+                allowNull: false,
+                references: {
+                    model: 'Usuarios',
+                    key: 'email'
+                }
             }
         })
     },

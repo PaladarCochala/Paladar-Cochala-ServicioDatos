@@ -8,37 +8,37 @@ module.exports = {
                 descripcion: 'Buen gusto',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 1,
-                nombreUsuario: "UsuarioTest"
+                emailUsuario: "dragodes3@gmail.com"
             },
             {
                 descripcion: 'Me gusto el ambiente',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 2,
-                nombreUsuario: "UsuarioTest"
+                emailUsuario: "dragodes3@gmail.com"
             },
             {
                 descripcion: 'Muy buen servicio',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 4,
-                nombreUsuario: "UsuarioTest"
+                emailUsuario: "dragodes3@gmail.com"
             },
             {
                 descripcion: 'Me gusta la textura de la comida',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 4,
-                nombreUsuario: "UsuarioTest"
+                emailUsuario: "DaiAnser@gmail.com"
             },
             {
                 descripcion: 'No crei que exista una saltenia peor que las del frente del ic norte',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 7,
-                nombreUsuario: "UsuarioTest"            
+                emailUsuario: "DaiAnser@gmail.com"            
             },
             {
                 descripcion: 'Me gusto el ambiente',
                 fechaDePublicacion: '2021-06-25',
                 restauranteId: 3,
-                nombreUsuario: "UsuarioTest"
+                emailUsuario: "DaiAnser@gmail.com"
             }
         ]);
     },
