@@ -20,10 +20,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            correo: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },    
             contadorComentario: {
                 type: Sequelize.INTEGER,
                 allowNull: true
