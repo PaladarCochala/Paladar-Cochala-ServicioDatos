@@ -15,6 +15,14 @@
         {
             "name": "Comentario",
             "description": "API para los comentarios del sistema"
+        },
+        {
+            "name": "Usuario",
+            "description": "API para los usuarios del sistema"
+        },
+        {
+            "name": "End-points",
+            "description": "API para diferentes peticiones del sistema"
         }
     ],
     "schemes": [
@@ -91,6 +99,9 @@
                         "schema": {
                             "$ref": "#/definitions/Restaurante"
                         }
+                    },
+                    "404": {
+                        "description": "No se encontro el restaurante"
                     }
                 }
             },
@@ -123,6 +134,9 @@
                         "schema": {
                             "$ref": "#/definitions/Restaurante"
                         }
+                    },
+                    "404": {
+                        "description": "No se encontro el restaurante"
                     }
                 }
             },
@@ -144,6 +158,9 @@
                 "responses": {
                     "200": {
                         "description": "El restaurante fue eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "No se encontro el restaurante"
                     }
                 }
             }
@@ -195,6 +212,9 @@
                         "schema": {
                             "$ref": "#/definitions/Comentario"
                         }
+                    },
+                    "404": {
+                        "description": "No se encontro el comentario"
                     }
                 }
             },
@@ -216,6 +236,156 @@
                 "responses": {
                     "200": {
                         "description": "El comentario fue eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "No se encontro el comentario"
+                    }
+                }
+            }
+        },
+        "/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Obtener toda la informacion de los usuarios",
+                "description": "Obtener toda la informacion de los usuarios",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Crear un nuevo usuario",
+                "description": "Crear un nuevo usuario",
+                "parameters": [
+                    {
+                        "name": "Nuevo Usuario",
+                        "in": "body",
+                        "description": "Toda la informacion de un usuario",
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El usuario fue creado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{email}": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Muestra un usuario en especifico",
+                "description": "Muestra un usuario en especifico por el ID del URL, el email",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del usuario, el email",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El usuario existe",
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontro el usuario"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Editar toda la informacion de un usuario especifico",
+                "description": "Editar toda la informacion de un usuario en especifco por el ID en el URL",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del Usuario, el correo electronico",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Datos nuevos para el Usuario a editar",
+                        "in": "body",
+                        "description": "Toda la informacion de un Usuario",
+                        "schema": {
+                            "$ref": "#/definitions/UsuarioSinEmail"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El Usuario fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontro el usuario"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Elimina un usuario en especifico",
+                "description": "Elimina un usuario en especifco por el ID en el URL, el email",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del usuario, el email",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El usuario fue eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "No se encontro el usuario"
+                    }
+                }
+            }
+        },
+        "/restaurantes/ultimos": {
+            "get": {
+                "tags": [
+                    "End-points"
+                ],
+                "summary": "Obtener los ultimos 5 restauranres registrados al sistema",
+                "description": "Obtener los 5 ultimos restaurantes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurante"
+                        }
                     }
                 }
             }
@@ -240,8 +410,35 @@
                 "promedioServicio": {
                     "type": "number"
                 },
-                "logo": {
+                "urlLogo": {
                     "type": "string"
+                },
+                "fechaDeCreacion": {
+                    "type": "string"
+                },
+                "contadorDeComentarios": {
+                    "type": "number"
+                },
+                "rangoDePrecios": {
+                    "type": "string"
+                },
+                "contacto": {
+                    "type": "string"
+                },
+                "urlFacebook": {
+                    "type": "string"
+                },
+                "urlInstagram": {
+                    "type": "string"
+                },
+                "urlYoutube": {
+                    "type": "string"
+                },
+                "urlPedidosYa": {
+                    "type": "string"
+                },
+                "estaActivo": {
+                    "type": "boolean"
                 }
             }
         },
@@ -259,8 +456,35 @@
                 "promedioServicio": {
                     "type": "number"
                 },
-                "logo": {
+                "urlLogo": {
                     "type": "string"
+                },
+                "fechaDeCreacion": {
+                    "type": "string"
+                },
+                "contadorDeComentarios": {
+                    "type": "number"
+                },
+                "rangoDePrecios": {
+                    "type": "string"
+                },
+                "contacto": {
+                    "type": "string"
+                },
+                "urlFacebook": {
+                    "type": "string"
+                },
+                "urlInstagram": {
+                    "type": "string"
+                },
+                "urlYoutube": {
+                    "type": "string"
+                },
+                "urlPedidosYa": {
+                    "type": "string"
+                },
+                "estaActivo": {
+                    "type": "boolean"
                 }
             }
         },
@@ -273,7 +497,13 @@
                 "descripcion": {
                     "type": "string"
                 },
-                "RestauranteId": {
+                "fechaDePublicacion": {
+                    "type": "string"
+                },
+                "emailUsuario": {
+                    "type": "string"
+                },
+                "restauranteId": {
                     "type": "number"
                 }
             }
@@ -283,8 +513,68 @@
                 "descripcion": {
                     "type": "string"
                 },
-                "RestauranteId": {
+                "fechaDePublicacion": {
+                    "type": "string"
+                },
+                "emailUsuario": {
+                    "type": "string"
+                },
+                "restauranteId": {
                     "type": "number"
+                }
+            }
+        },
+        "Usuario": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "contrasenia": {
+                    "type": "string"
+                },
+                "contadorComentario": {
+                    "type": "number"
+                },
+                "urlImagenPerfil": {
+                    "type": "number"
+                },
+                "esAdmin": {
+                    "type": "boolean"
+                },
+                "estaActivo": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "UsuarioSinEmail": {
+            "properties": {
+                "nickname": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "contrasenia": {
+                    "type": "string"
+                },
+                "contadorComentario": {
+                    "type": "number"
+                },
+                "urlImagenPerfil": {
+                    "type": "number"
+                },
+                "esAdmin": {
+                    "type": "boolean"
+                },
+                "estaActivo": {
+                    "type": "boolean"
                 }
             }
         }
