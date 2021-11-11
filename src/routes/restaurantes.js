@@ -5,18 +5,7 @@ const Rutas = require('../resources/routes');
 const restauranteService = require('../app/services/RestauranteService'); 
 
 // api/restaurantes/
-router.get(
-    Rutas.empty,
-    async (request, response) => {
-        try {
-            const restaurantes = await restauranteService.obtenerRestaurantes(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(restaurantes));
-        } catch (error) {
-            response.status(404).send(error);
-        }
-    }
-);
+router.get(Rutas.empty, restauranteService.obtenerRestaurantes);
 
 router.post(
     Rutas.empty,
