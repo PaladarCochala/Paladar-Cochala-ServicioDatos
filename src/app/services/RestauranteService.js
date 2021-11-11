@@ -3,8 +3,14 @@ const { Restaurante, Comentario } = require('../models');
 const RestauranteService = {
     obtenerRestaurantes: async (request, response) => {
         try {
-            let restaurantes = await Restaurante.findAll();
-            return { response: restaurantes }
+            let restaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
+                order: [['id', 'ASC']]
+            });
+            return response.status(200).send({
+                response : restaurantes
+            });
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
