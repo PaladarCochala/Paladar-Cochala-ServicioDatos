@@ -3,8 +3,13 @@ const { Usuario, Comentario } = require('../models');
 const UsuarioService = {
     obtenerUsuarios: async (request, response) => {
         try {
-            let usuarios = await Usuario.findAll();
-            return { response: usuarios }
+            let usuarios = await Usuario.findAll({
+                raw: true,
+                nest: true
+            });
+            return response.status(200).send({
+                response : usuarios
+            });
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
@@ -16,15 +21,19 @@ const UsuarioService = {
         try {
             const { email } = request.params;
             let usuarioBuscado = await Usuario.findOne({
+                raw: true,
+                nest: true,
                 include: [{model: Comentario}],
                 where: {
                     email
                 }
             });
             if (usuarioBuscado) {
-                return { response: usuarioBuscado };
+                return response.status(200).send({
+                    response : usuarioBuscado
+                });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el usuario"
                 });
             }
@@ -38,22 +47,20 @@ const UsuarioService = {
     crearUsuario: async (request, response) => {
         try {
             const email = request.body.email
-            console.log(email)
             const [nuevoUsuario, fueCreado] = await Usuario.findOrCreate({
                 where : {
                     email
                 },
                 defaults: request.body   
             });
-            console.log(fueCreado)
             if (fueCreado) {
-                return {
+                return response.status(200).send({
                     message: 'El usuario fue creado exitosamente',
                     response: nuevoUsuario
-                };
+                });
             } else {
-                response.status(200).json({
-                    message: "Ya existe ese usuario"
+                return response.status(200).json({
+                    message: "Ya existe un usuario con ese email"
                 });
             }   
         } catch (error) {
@@ -72,11 +79,11 @@ const UsuarioService = {
                 }
             })
             if (contadorRestaurenteEliminado != 0) {
-                return { 
+                return response.status(200).send({ 
                     message: 'Usuario borrado satisfactoriamente', 
-                    count: contadorRestaurenteEliminado };
+                    count: contadorRestaurenteEliminado });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el usuario"
                 });
             }
@@ -96,11 +103,11 @@ const UsuarioService = {
                 }
             })
             if(contadorUsuarioActualizado != 0) {
-                return { 
+                return response.status(200).send({  
                     message: 'Usuario Actualizado satisfactoriamente', 
-                    count: contadorUsuarioActualizado };
+                    count: contadorUsuarioActualizado });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el usuario"
                 });
             }
