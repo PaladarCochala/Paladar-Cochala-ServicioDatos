@@ -3,8 +3,14 @@ const { Restaurante, Comentario } = require('../models');
 const RestauranteService = {
     obtenerRestaurantes: async (request, response) => {
         try {
-            let restaurantes = await Restaurante.findAll();
-            return { response: restaurantes }
+            let restaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
+                order: [['id', 'ASC']]
+            });
+            return response.status(200).send({
+                response : restaurantes
+            });
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
@@ -22,7 +28,9 @@ const RestauranteService = {
                 }
             });
             if (restauranteBuscado) {
-                return { response: restauranteBuscado };
+                return response.status(200).send({
+                    response : restauranteBuscado
+                });
             } else {
                 response.status(404).json({
                     message: "No se encontro el restaurante"
@@ -38,11 +46,10 @@ const RestauranteService = {
     crearRestaurante: async (request, response) => {
         try {
             const nuevoRestaurante = await Restaurante.create(request.body);
-            const result = {
+            return response.status(200).send({
                 message: 'El restaurante fue creado exitosamente',
                 response: nuevoRestaurante
-            };
-            return result;
+            });
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
@@ -59,12 +66,12 @@ const RestauranteService = {
                 }
             });
             if (contadorRestaurenteEliminado != 0) {
-                return { 
+                return response.status(200).send({ 
                     message: 'Restaurante borrado satisfactoriamente', 
                     count: contadorRestaurenteEliminado 
-                };
+                });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el restaurante"
                 });
             }
@@ -85,12 +92,12 @@ const RestauranteService = {
             });
             if(contadorRestauranteActualizado != 0)
             {
-                return { 
+                return response.status(200).send({ 
                     message: 'Restaurante Actualizado satisfactoriamente', 
                     count: contadorRestauranteActualizado 
-                };
+                });
             }else{
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el restaurante"
                 });
             }
@@ -105,10 +112,14 @@ const RestauranteService = {
     obtenerUltimos5Restaurantes: async(require, response) => {
         try {
             let ultimosRestaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
                 limit: 5,
                 order: [['id', 'DESC']]
             });
-            return { response: ultimosRestaurantes }
+            return response.status(200).send({ 
+                response: ultimosRestaurantes 
+            });
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
