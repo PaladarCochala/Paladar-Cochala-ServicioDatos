@@ -3,8 +3,14 @@ const { Comentario, Restaurante } = require('../models');
 const ComentarioService = {
     obtenerComentarios: async (request, response) => {
         try {
-            let comentarios = await Comentario.findAll();
-            return { response : comentarios }
+            let comentarios = await Comentario.findAll({
+                raw: true,
+                nest: true,
+                order: [['id', 'ASC']]
+            });
+            return response.status(200).send({
+                response : comentarios
+            });
         } catch (error) {
             response.status(500).json({
                 message: 'Algo salio mal con el Servidor'
@@ -21,9 +27,11 @@ const ComentarioService = {
                 }
             });
             if (comentarioBuscado) {
-                return { response : comentarioBuscado };
+                return response.status(200).send({
+                    response : comentarioBuscado 
+                });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el restaurante"
                 });
             }
@@ -37,12 +45,12 @@ const ComentarioService = {
     crearComentario: async (request, response) => {
         try {
             const nuevoComentario = await Comentario.create(request.body);
-            const result = {
+
+            return response.status(200).send({
                 message: 'El restaurante fue creado exitosamente',
                 response: nuevoComentario
-            };
-            
-            return result;
+            });
+
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
@@ -59,12 +67,12 @@ const ComentarioService = {
                 }
             });
             if (contadorComentarioEliminado != 0) {
-                return {
+                return response.status(200).send({
                     message: 'Comentario borrado satisfactoriamente',
                     count: contadorComentarioEliminado
-                };
+                });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el comentario"
                 });
             }
@@ -84,12 +92,12 @@ const ComentarioService = {
                 }
             });
             if (contadorComentarioActualizado != 0) {
-                return {
+                return response.status(200).send({
                     message: 'Comentaio Actualizado satisfactoriamente',
                     count: contadorComentarioActualizado
-                };
+                });
             } else {
-                response.status(404).json({
+                return response.status(404).json({
                     message: "No se encontro el comentario"
                 });
             }
@@ -105,9 +113,21 @@ const ComentarioService = {
         try {
             const { restauranteId } = request.params;
             let comentarios = await Comentario.findAll({
-                where: { restauranteId }
+                raw: true,
+                nest: true,
+                where: { restauranteId },
+                order: [['id', 'ASC']]
             });
-            return { comentarios };
+            if(comentarios.length != 0)
+            {
+                return response.status(200).send({ 
+                    response: comentarios 
+                });
+            } else {
+                return response.status(404).json({ 
+                    message: "Este restaurante no tiene comentarios" 
+                    });
+            }
         } catch (error) {
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
