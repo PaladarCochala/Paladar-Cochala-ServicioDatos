@@ -18,5 +18,6 @@ router.put( Rutas.id, comentarioService.actualizarComentario );
 
 // api/comentaios/restaurante/:restauranteId
 router.get( '/restaurante/:restauranteId', comentarioService.obtenerComentariosPorRestaurante);
+router.get( '/detallado/restaurante/:restauranteId', comentarioService.obtenerComentariosDetalladosPorRestaurante);
 
 module.exports = router;
