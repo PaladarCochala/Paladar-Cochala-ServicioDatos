@@ -118,6 +118,7 @@ const ComentarioService = {
                 where: { restauranteId },
                 order: [['id', 'ASC']]
             });
+            console.log(comentarios.descripcion)
             if(comentarios.length != 0)
             {
                 return response.status(200).send({ 
