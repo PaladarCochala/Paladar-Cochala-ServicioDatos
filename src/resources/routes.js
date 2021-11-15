@@ -8,6 +8,10 @@ module.exports = {
         url: '/restaurantes',
         ultimos: {
             url: '/ultimos'
+        },
+        promedio: {
+            servicio: '/servicio',
+            sabor: '/sabor'
         }
     },
     usuarios: {

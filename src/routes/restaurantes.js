@@ -12,6 +12,10 @@ router.post(Rutas.empty, restauranteService.crearRestaurante);
 //Nuevos END-POINTS
 router.get(Rutas.restaurantes.ultimos.url, restauranteService.obtenerUltimos5Restaurantes);
 
+router.get(Rutas.restaurantes.promedio.servicio, restauranteService.obtener5RestaurantesConMayorServicio);
+
+router.get(Rutas.restaurantes.promedio.sabor, restauranteService.obtener5RestaurantesConMayorSabor);
+
 // api/restaurantes/:id
 router.get(Rutas.id, restauranteService.obtenerUnRestaurante);
 
