@@ -125,6 +125,41 @@ const RestauranteService = {
                 message: "Algo salio mal con el Servidor"
             });
         }
+    },
+    obtener5RestaurantesConMayorServicio: async(require, response) => {
+        try {
+            let servicioRestaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
+                limit: 5,
+                order: [['promedioServicio', 'DESC']]
+            });
+            return response.status(200).send({ 
+                response: servicioRestaurantes 
+            });
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+    obtener5RestaurantesConMayorSabor: async(require, response) => {
+        try {
+            let saborRestaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
+                limit: 5,
+                order: [['promedioSabor', 'DESC']]
+            });
+            return response.status(200).send({ 
+                response: saborRestaurantes 
+            });
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
     }
 }
 module.exports = RestauranteService;
