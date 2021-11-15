@@ -1,4 +1,4 @@
-const { Comentario, Restaurante } = require('../models');
+const { Comentario, Usuario } = require('../models');
 
 const ComentarioService = {
     obtenerComentarios: async (request, response) => {
@@ -32,7 +32,7 @@ const ComentarioService = {
                 });
             } else {
                 return response.status(404).json({
-                    message: "No se encontro el restaurante"
+                    message: "No se encontro el comentario"
                 });
             }
         } catch (error) {
@@ -45,9 +45,8 @@ const ComentarioService = {
     crearComentario: async (request, response) => {
         try {
             const nuevoComentario = await Comentario.create(request.body);
-
             return response.status(200).send({
-                message: 'El restaurante fue creado exitosamente',
+                message: 'El comentario fue creado exitosamente',
                 response: nuevoComentario
             });
 
@@ -129,6 +128,40 @@ const ComentarioService = {
                     });
             }
         } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
+    obtenerComentariosDetalladosPorRestaurante: async (request, response) => {
+        try {
+            const { restauranteId } = request.params;
+            let comentarios = await Comentario.findAll({
+                raw: true,
+                nest: true,
+                where: { restauranteId },
+                order: [['id', 'ASC']],
+                attributes: { exclude: ['emailUsuario']},
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    attributes: { exclude: ['contrasenia', 'contadorComentario', 'esAdmin', 'estaActivo'] }
+                }]
+            });
+            if(comentarios.length != 0)
+            {
+                return response.status(200).send({ 
+                    response: comentarios 
+                });
+            } else {
+                return response.status(404).json({ 
+                    message: "Este restaurante no tiene comentarios" 
+                    });
+            }
+        } catch (error) {
+            console.log('======================================================')
+            console.log(error)
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
             });
