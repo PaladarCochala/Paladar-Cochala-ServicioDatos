@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       'descripcion': DataTypes.STRING,
       'fechaDePublicacion': DataTypes.DATE,
+      'valoracionSabor': DataTypes.DOUBLE,
+      'valoracionServicio': DataTypes.DOUBLE,
       'emailUsuario': DataTypes.STRING,
       'restauranteId': DataTypes.INTEGER
     },

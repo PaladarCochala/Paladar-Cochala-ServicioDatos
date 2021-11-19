@@ -16,6 +16,14 @@ module.exports = {
             fechaDePublicacion:{
                 type: Sequelize.DATEONLY,
                 allowNull: false
+            },
+            valoracionSabor: {
+                type: Sequelize.DOUBLE,
+                allowNull: true
+            },
+            valoracionServicio: {
+                type: Sequelize.DOUBLE,
+                allowNull: true
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
