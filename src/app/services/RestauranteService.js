@@ -45,6 +45,9 @@ const RestauranteService = {
 
     crearRestaurante: async (request, response) => {
         try {
+            request.body.promedioSabor = 0;
+            request.body.promedioServicio = 0;
+            request.body.contadorDeComentarios = 0;
             const nuevoRestaurante = await Restaurante.create(request.body);
             return response.status(200).send({
                 message: 'El restaurante fue creado exitosamente',

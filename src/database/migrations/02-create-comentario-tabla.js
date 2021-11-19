@@ -19,11 +19,11 @@ module.exports = {
             },
             valoracionSabor: {
                 type: Sequelize.DOUBLE,
-                allowNull: true
+                allowNull: false
             },
             valoracionServicio: {
                 type: Sequelize.DOUBLE,
-                allowNull: true
+                allowNull: false
             }, 
             restauranteId: {
                 type: Sequelize.INTEGER,
