@@ -12,12 +12,17 @@ module.exports = {
         promedio: {
             servicio: '/servicio',
             sabor: '/sabor'
-        }
+        },
+        etiqueta: '/etiqueta/:etiqueta',
     },
     usuarios: {
         url: '/usuarios'
     },
-    comentarios:{
+    etiquetas: {
+        url: '/etiquetas'
+    },
+    comentarios: {
         url: '/comentarios'
-    }
+    },
+
 };
