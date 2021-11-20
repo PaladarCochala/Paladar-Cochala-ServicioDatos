@@ -1,4 +1,5 @@
-const { Restaurante, Comentario } = require('../models');
+const e = require('express');
+const { Restaurante, Comentario, Etiqueta } = require('../models');
 
 const RestauranteService = {
     obtenerRestaurantes: async (request, response) => {
@@ -12,6 +13,7 @@ const RestauranteService = {
                 response : restaurantes
             });
         } catch (error) {
+            console.log(error)
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
             });
@@ -22,7 +24,11 @@ const RestauranteService = {
         try {
             const { id } = request.params;
             let restauranteBuscado = await Restaurante.findOne({
-                include: [{model: Comentario}],
+                include: [{model: Comentario,},
+                          {model: Etiqueta, 
+                           as: 'Etiquetas', 
+                           attributes: ["nombreEtiqueta"]
+                        }],
                 where: {
                     id
                 }
@@ -49,6 +55,7 @@ const RestauranteService = {
             request.body.promedioServicio = 0;
             request.body.contadorDeComentarios = 0;
             const nuevoRestaurante = await Restaurante.create(request.body);
+
             return response.status(200).send({
                 message: 'El restaurante fue creado exitosamente',
                 response: nuevoRestaurante
@@ -60,6 +67,41 @@ const RestauranteService = {
         }
     },
 
+    unirRestauranteConEtiquetas: async (request, response) => {
+        try {
+            const nombreRestaurante = request.body.nombre;
+            const etiquetas = request.body.etiquetas;
+            const restauranteBuscado = await Restaurante.findOne({
+                where : {
+                    nombre : nombreRestaurante
+                },
+            });
+            etiquetas.map(async etiqueta => {
+                const etiquetabuscada = await Etiqueta.findOne({
+                    where : {
+                        nombreEtiqueta : etiqueta.nombreEtiqueta
+                    }
+                });
+                if(etiquetabuscada) {
+                    await restauranteBuscado.addEtiquetas(etiquetabuscada);
+                }
+            })
+            if (restauranteBuscado) {
+                return response.status(200).send({
+                    message: 'las relaciones fueron creadas con exito',
+                    response : restauranteBuscado
+                });
+            } else {
+                response.status(404).json({
+                    message: "No se encontro el restaurante"
+                });
+            }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
     eliminarRestaurante: async (request, response) => {
         try {
             const { id } = request.params;
@@ -76,6 +118,41 @@ const RestauranteService = {
             } else {
                 return response.status(404).json({
                     message: "No se encontro el restaurante"
+                });
+            }
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
+    eliminarRelacionEtiquetasRestaurante: async (request, response) => {
+        try {
+            const nombreRestaurante = request.body.nombre;
+            const etiquetas = request.body.etiquetas;
+            const restauranteBuscado = await Restaurante.findOne({
+                where : {
+                    nombre : nombreRestaurante
+                },
+            });
+            etiquetas.map(async etiqueta => {
+                const etiquetabuscada = await Etiqueta.findOne({
+                    where : {
+                        nombreEtiqueta : etiqueta.nombreEtiqueta
+                    }
+                });
+                if(etiquetabuscada) {
+                    await restauranteBuscado.removeEtiquetas(etiquetabuscada);
+                }
+            })
+            if(restauranteBuscado) {
+                response.status(200).json({
+                    message: "las relaciones fueron borradas exitosamente"
+                })
+            } else {
+                return response.status(404).json({
+                    message: "No existen esas etiquetas"
                 });
             }
         } catch (error) {
@@ -163,6 +240,29 @@ const RestauranteService = {
                 message: "Algo salio mal con el Servidor"
             });
         }
-    }
+    },
+    obtenerRestaurantesPorEtiquetas: async (request, response) => {
+        try {
+            const { etiqueta }  = request.params;
+            let restaurantes = await Restaurante.findAll({
+                raw: true,
+                nest: true,
+                order: [['id', 'ASC']],
+                include : [{
+                    model: Etiqueta,
+                    as: 'Etiquetas',
+                    where: { nombreEtiqueta: etiqueta }
+                }]
+            });
+            return response.status(200).send({
+                response : restaurantes
+            });
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
 }
 module.exports = RestauranteService;

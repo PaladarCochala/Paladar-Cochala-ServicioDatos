@@ -6,8 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 
 const nombresRutas = require('./resources/routes');
 const restauranteRoute = require('./routes/restaurantes');
-const comentarios = require('./routes/comentarios');
+const comentarioRoute = require('./routes/comentarios');
 const usuarioRoute = require('./routes/usuarios');
+const etiquetaRoute = require('./routes/etiquetas');
 const swaggerDocumento = require('./config/swagger.json'); 
 const ROUTE_URL = '/api';
 
@@ -25,7 +26,8 @@ class Application {
     setUpRoutes() {
         this.express.use(ROUTE_URL + nombresRutas.restaurantes.url, restauranteRoute);
         this.express.use(ROUTE_URL + nombresRutas.usuarios.url, usuarioRoute);
-        this.express.use(ROUTE_URL + nombresRutas.comentarios.url, comentarios);
+        this.express.use(ROUTE_URL + nombresRutas.comentarios.url, comentarioRoute);
+        this.express.use(ROUTE_URL + nombresRutas.etiquetas.url, etiquetaRoute);
     }
 
     setUpExpress() {
