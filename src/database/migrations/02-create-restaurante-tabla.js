@@ -26,7 +26,7 @@ module.exports = {
                 allowNull: true
             },
             urlLogo: {
-                type: Sequelize.STRING(1024),
+                type: Sequelize.TEXT,
                 allowNull: true
             },
             fechaDeCreacion: {
