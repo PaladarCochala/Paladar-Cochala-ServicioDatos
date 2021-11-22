@@ -11,7 +11,7 @@ router.get( Rutas.empty, comentarioService.obtenerComentarios );
 router.post( 
     Rutas.empty,
     [verificarComentario.verificarAtributosComentarios],
-    comentarioService.crearComentario );
+    comentarioService.crearComentario2 );
 
 // api/comentaios/:id
 router.get( Rutas.id, comentarioService.obtenerUnComentario );

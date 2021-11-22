@@ -57,6 +57,36 @@ const ComentarioService = {
         }
     },
 
+    crearComentario2: async (request, response) => {
+        try {
+            const emailUsuario = request.body.emailUsuario;
+            const restauranteId = request.body.restauranteId;
+            let comentarioBuscado = await Comentario.findOne({
+                where: {
+                    emailUsuario,
+                    restauranteId
+                }
+            });
+
+            if (comentarioBuscado) {
+                return response.status(200).send({
+                    message: "El usuario ya comento el restaurante"
+                });
+            } else {
+                const nuevoComentario = await Comentario.create(request.body);
+                return response.status(200).send({
+                    message: 'El comentario fue creado exitosamente',
+                    response: nuevoComentario
+                });
+            }
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
     eliminarComentario: async (request, response) => {
         try {
             const { id } = request.params;

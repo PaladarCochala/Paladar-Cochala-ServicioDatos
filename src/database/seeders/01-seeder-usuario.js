@@ -33,6 +33,16 @@ module.exports = {
                 urlImagenPerfil: null,
                 esAdmin: false,
                 estaActivo: true
+            },
+            {
+                email: 'frozst@gmail.com',
+                nickname: 'Frozst',
+                nombre: 'Allen Vargas Valverde ',
+                contrasenia: 'minimo3',
+                contadorComentario: 0,
+                urlImagenPerfil: null,
+                esAdmin: false,
+                estaActivo: true
             }
         ]);
     },
