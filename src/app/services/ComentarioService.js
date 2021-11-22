@@ -212,7 +212,7 @@ const ComentarioService = {
                     response : comentarioBuscado 
                 });
             } else {
-                return response.status(404).json({
+                return response.status(200).send({
                     estaComentadoElRestaurante : false,
                     message: "No se encontro el comentario"
                 });
