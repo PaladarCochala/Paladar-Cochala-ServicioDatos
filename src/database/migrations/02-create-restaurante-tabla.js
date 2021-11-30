@@ -17,6 +17,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
+            descripcion: {
+                type: Sequelize.TEXT,
+                allowNull: true
+            },
             promedioSabor: {
                 type: Sequelize.DOUBLE,
                 allowNull: true
@@ -42,7 +46,7 @@ module.exports = {
                 allowNull: true
             },
             contacto: {
-                type: Sequelize.STRING,
+                type: Sequelize.INTEGER,
                 allowNull: true
             },
             urlFacebook: {
