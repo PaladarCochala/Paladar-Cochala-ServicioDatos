@@ -25,8 +25,6 @@ module.exports = (sequelize, DataTypes) => {
           });
         },
         beforeBulkDestroy: async function(id, options){
-          console.log(id.where.id)
-          console.log("hola")
           const comentario = await sequelize.models.Comentario.findOne({
             raw: true,
             nest: true,
