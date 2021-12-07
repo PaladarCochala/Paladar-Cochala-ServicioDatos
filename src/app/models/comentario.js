@@ -23,7 +23,24 @@ module.exports = (sequelize, DataTypes) => {
                 id : comentario.restauranteId
             }
           });
-        }
+        },
+        beforeBulkDestroy: async function(id, options){
+          const comentario = await sequelize.models.Comentario.findOne({
+            raw: true,
+            nest: true,
+            where: {
+              id: id.where.id
+            }
+            });
+          if(comentario) {
+            await sequelize.models.Restaurante.decrement({ contadorDeComentarios : 1 },
+            {
+              where: {
+                id : comentario.restauranteId
+              }
+            });
+          }
+        },
       }
     });
 
