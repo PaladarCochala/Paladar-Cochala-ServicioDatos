@@ -10,7 +10,7 @@ router.get( Rutas.empty, comentarioService.obtenerComentarios );
 
 router.post( 
     Rutas.empty,
-    //[verificarComentario.verificarAtributosComentarios],
+    [verificarComentario.verificarAtributosComentarios],
     comentarioService.crearComentario );
 
 // api/comentaios/:id
