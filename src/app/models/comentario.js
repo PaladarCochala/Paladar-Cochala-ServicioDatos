@@ -17,6 +17,27 @@ module.exports = (sequelize, DataTypes) => {
 
       hooks: {
         afterCreate: async function(comentario, options){
+          let valorSabor = await sequelize.models.Comentario.sum('valoracionSabor',
+            { where : {
+              restauranteId : comentario.restauranteId
+            }})
+          let valorServicio = await sequelize.models.Comentario.sum('valoracionServicio',
+          { where : {
+            restauranteId : comentario.restauranteId
+          }})
+          await sequelize.models.Comentario.count({
+            where : {
+            restauranteId : comentario.restauranteId
+          }}).then(res => {
+            let promedios = [ valorSabor / res, valorServicio / res]
+            return promedios;
+          }).then( async res  => {
+            await sequelize.models.Restaurante.update({promedioSabor: res[0], promedioServicio: res[1]},
+              { where : {
+                id : comentario.restauranteId
+              },
+            })
+          })
           await sequelize.models.Restaurante.increment({ contadorDeComentarios : 1 },
           {
             where: {
@@ -37,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
             {
               where: {
                 id : comentario.restauranteId
-              }
+              },
             });
           }
         },
