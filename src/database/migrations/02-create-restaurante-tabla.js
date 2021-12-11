@@ -68,6 +68,10 @@ module.exports = {
             estaActivo: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false
+            },
+            ubicacionMaps: {
+                type: Sequelize.STRING,
+                allowNull: true
             }
         })
     },
