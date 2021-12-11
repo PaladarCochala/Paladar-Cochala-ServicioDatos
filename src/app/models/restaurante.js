@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       'urlYoutube': DataTypes.STRING,
       'urlPedidosYa': DataTypes.STRING,
       'estaActivo': DataTypes.BOOLEAN,
+      'ubicacionMaps': DataTypes.STRING,
     }, {});
 
     Restaurante.associate = function(models){

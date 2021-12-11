@@ -19,7 +19,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Panchita',
@@ -36,7 +37,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Pollos Chester',
@@ -53,7 +55,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Pizza OverTime',
@@ -70,7 +73,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Pizza Villa Esperanza',
@@ -87,7 +91,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Cafe Capresso',
@@ -104,7 +109,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Salteñeria Castores',
@@ -121,7 +127,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Wistupikus',
@@ -138,7 +145,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Pizzeria Elis',
@@ -155,7 +163,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             },
             {
                 nombre: 'Planchitas Originales',
@@ -172,7 +181,8 @@ module.exports = {
                 urlInstagram: null,
                 urlYoutube: null,
                 urlPedidosYa: null,
-                estaActivo: true
+                estaActivo: true,
+                ubicacionMaps: null
             }
         ]);
     },
