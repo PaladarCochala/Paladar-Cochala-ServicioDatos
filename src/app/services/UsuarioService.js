@@ -70,6 +70,38 @@ const UsuarioService = {
         }
     },
 
+    crearOactualizarUsuario: async (request, response) => {
+        try {
+            const email = request.body.email
+            const [nuevoUsuario, fueCreado] = await Usuario.findOrCreate({
+                where : {
+                    email
+                },
+                defaults: request.body   
+            });
+            if (fueCreado) {
+                return response.status(200).send({
+                    message: 'El usuario fue creado exitosamente',
+                    response: nuevoUsuario
+                });
+            } else {
+                const contadorUsuarioActualizado = await Usuario.update(request.body, {
+                    where: {
+                        email
+                    }
+                })
+                return response.status(200).json({
+                    message: "Ya existe un usuario con ese email y se actaulizo su informacion",
+                    contadorActualizacion: contadorUsuarioActualizado
+                });
+            }   
+        } catch (error) {
+            response.status(500).json({
+                message: "Algo salio mal con el Servidor"
+            });
+        }
+    },
+
     eliminarUsuario: async (request, response) => {
         try {
             const { email } = request.params;

@@ -8,6 +8,7 @@ const usuarioService = require('../app/services/UsuarioService');
 router.get( Rutas.empty, usuarioService.obtenerUsuarios );
 
 router.post( Rutas.empty, usuarioService.crearUsuario );
+router.post( Rutas.empty + "/crearOactualizarUsuario", usuarioService.crearOactualizarUsuario );
 
 // api/usuarios/:email
 router.get( Rutas.email, usuarioService.obtenerUnUsuario );
