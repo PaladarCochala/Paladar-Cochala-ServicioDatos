@@ -80,7 +80,6 @@ const ComentarioService = {
                 });
             }
         } catch (error) {
-            console.log(error)
             response.status(500).json({
                 message: "Algo salio mal con el Servidor"
             });
