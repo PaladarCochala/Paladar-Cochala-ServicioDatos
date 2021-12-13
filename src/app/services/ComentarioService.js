@@ -1,4 +1,4 @@
-const { Comentario, Usuario } = require('../models');
+const { Comentario, Restaurante, Usuario } = require('../models');
 
 const ComentarioService = {
     obtenerComentarios: async (request, response) => {
@@ -90,12 +90,38 @@ const ComentarioService = {
     eliminarComentario: async (request, response) => {
         try {
             const { id } = request.params;
+            const comentario = await Comentario.findOne({
+                where: {
+                    id
+                }
+            })
             const contadorComentarioEliminado = await Comentario.destroy({
                 where: {
                     id
                 }
             });
             if (contadorComentarioEliminado != 0) {
+                let valorSabor = await Comentario.sum('valoracionSabor',
+                    { where : {
+                    restauranteId : comentario.restauranteId
+                    }})
+                let valorServicio = await Comentario.sum('valoracionServicio',
+                { where : {
+                    restauranteId : comentario.restauranteId
+                }})
+                await Comentario.count({
+                    where : {
+                    restauranteId : comentario.restauranteId
+                }}).then(res => {
+                    let promedios = [ valorSabor / res, valorServicio / res]
+                    return promedios;
+                }).then( async res  => {
+                    await Restaurante.update({promedioSabor: res[0], promedioServicio: res[1]},
+                    { where : {
+                        id : comentario.restauranteId
+                    },
+                    })
+                })
                 return response.status(200).send({
                     message: 'Comentario borrado satisfactoriamente',
                     count: contadorComentarioEliminado
