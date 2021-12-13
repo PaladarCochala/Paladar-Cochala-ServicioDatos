@@ -229,7 +229,13 @@ const ComentarioService = {
                 where: {
                     emailUsuario,
                     restauranteId
-                }
+                },
+                attributes: { exclude: ['emailUsuario']},
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    attributes: { exclude: ['contrasenia', 'contadorComentario', 'esAdmin', 'estaActivo'] }
+                }]
             });
             if (comentarioBuscado) {
                 return response.status(200).send({

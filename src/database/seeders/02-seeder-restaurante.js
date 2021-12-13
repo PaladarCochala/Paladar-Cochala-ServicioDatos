@@ -20,7 +20,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Panchita',
@@ -38,7 +38,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Pollos Chester',
@@ -56,7 +56,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Pizza OverTime',
@@ -74,7 +74,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Pizza Villa Esperanza',
@@ -92,7 +92,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Cafe Capresso',
@@ -110,7 +110,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Salteñeria Castores',
@@ -128,7 +128,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Wistupikus',
@@ -146,7 +146,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Pizzeria Elis',
@@ -164,7 +164,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             },
             {
                 nombre: 'Planchitas Originales',
@@ -182,7 +182,7 @@ module.exports = {
                 urlYoutube: null,
                 urlPedidosYa: null,
                 estaActivo: true,
-                ubicacionMaps: null
+                ubicacionMaps: "-17.371761, -66.143120"
             }
         ]);
     },
