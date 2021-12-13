@@ -8,7 +8,7 @@ const { verificarComentario } = require('../middleware')
 // api/comentarios/
 router.get( Rutas.empty, comentarioService.obtenerComentarios );
 
-router.post( 
+router.post(
     Rutas.empty,
     [verificarComentario.verificarAtributosComentarios],
     comentarioService.crearComentario );
