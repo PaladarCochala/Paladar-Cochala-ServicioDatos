@@ -16,10 +16,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            contrasenia: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
             contadorComentario: {
                 type: Sequelize.INTEGER,
                 allowNull: true
@@ -30,7 +26,8 @@ module.exports = {
             },
             esAdmin: {
                 type: Sequelize.BOOLEAN,
-                allowNull: false
+                allowNull: false,
+                defaultValue: false
             },
             estaActivo: {
                 type: Sequelize.BOOLEAN,

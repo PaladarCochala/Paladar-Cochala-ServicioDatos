@@ -201,7 +201,7 @@ const ComentarioService = {
                 include: [{
                     model: Usuario,
                     as: 'usuario',
-                    attributes: { exclude: ['contrasenia', 'contadorComentario', 'esAdmin', 'estaActivo'] }
+                    attributes: { exclude: ['contadorComentario', 'esAdmin', 'estaActivo'] }
                 }]
             });
             if(comentarios.length != 0)
@@ -234,7 +234,7 @@ const ComentarioService = {
                 include: [{
                     model: Usuario,
                     as: 'usuario',
-                    attributes: { exclude: ['contrasenia', 'contadorComentario', 'esAdmin', 'estaActivo'] }
+                    attributes: { exclude: ['contadorComentario', 'esAdmin', 'estaActivo'] }
                 }]
             });
             if (comentarioBuscado) {
