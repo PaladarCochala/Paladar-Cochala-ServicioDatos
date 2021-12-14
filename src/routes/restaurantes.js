@@ -1,92 +1,33 @@
 'use strict';
-const express = require('express');
+const express = require('express')
 const router = express.Router();
 const Rutas = require('../resources/routes');
-const restauranteService = require('../app/services/RestauranteService');
-const comentarioService = require('../app/services/ComentarioService');
+const restauranteService = require('../app/services/RestauranteService'); 
 
-router.get(
-    Rutas.empty,
-    async (request, response) => {
-        try {
-            const restaurantes = await restauranteService.getRestaurantes(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(restaurantes));
-        }
-        catch (error) {
-            response.status(404).send(error);
-        }
-    }
-);
+// api/restaurantes/
+router.get(Rutas.empty, restauranteService.obtenerRestaurantes);
 
-router.get(
-    Rutas.id,
-    async (request, response) => {
-        try {
-            const restaurante = await restauranteService.getRestaurante(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(restaurante));
-        } catch (error) {
-            response.status(404).send(error);
-        }
-    }
-)
+router.post(Rutas.empty, restauranteService.crearRestaurante);
 
-router.post(
-    Rutas.empty,
-    async (request, response) => {
-        try {
-            const newRestaurante = await restauranteService.createRestaurante(request, response);
-            response.set('Content-type', 'application/json');
-            response.status(200).end(JSON.stringify(newRestaurante));
-        } catch (error) {
-            response.status(404).send('Error while creating Restaurante');
-        }
-    }
-);
+router.post('/crearEtiquetas', restauranteService.unirRestauranteConEtiquetas);
 
-router.delete(
-    Rutas.id,
-    async (request, response) => {
-        try {
-          const result = await restauranteService.deleteRestaurante(request, response);
-          response.set('Content-type', 'application/json');
-          response.status(200).send(result);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-);
-router.delete(
-    '/comentarios/:id',
-    async(request, response) => {
-    try {
-        const result = await comentarioService.deleteComentario(request, response);
-        response.status(200).send(result);
-    } catch (error) {
-        console.log(error);
-    }
-});
-router.put(
-    '/comentarios/:id',
-    async(request, response) => {
-    try {
-        const result = await comentarioService.actualizarComentario(request, response);
-        response.status(200).send(result);
-    } catch (error) {
-        console.log(error);
-    }
-});
-router.put(
-    Rutas.id,
-    async (request, response) => {
-        try {
-           const result = await restauranteService.actualizarRestaurante(request, response);
-           response.set('Content-type', 'application/json');
-           response.status(200).send(result); 
-        } catch (error) {
-            console.log(error);
-        }
-    }
-)
+router.delete('/borrarEtiquetas', restauranteService.eliminarRelacionEtiquetasRestaurante);
+
+//Nuevos END-POINTS
+router.get(Rutas.restaurantes.ultimos.url, restauranteService.obtenerUltimos5Restaurantes);
+
+router.get(Rutas.restaurantes.promedio.servicio, restauranteService.obtener5RestaurantesConMayorServicio);
+
+router.get(Rutas.restaurantes.promedio.sabor, restauranteService.obtener5RestaurantesConMayorSabor);
+
+router.get(Rutas.restaurantes.etiqueta, restauranteService.obtenerRestaurantesPorEtiquetas);
+
+// api/restaurantes/:id
+router.get(Rutas.id, restauranteService.obtenerUnRestaurante);
+
+router.delete(Rutas.id, restauranteService.eliminarRestaurante);
+
+router.put(Rutas.id, restauranteService.actualizarRestaurante);
+
+
 module.exports = router;

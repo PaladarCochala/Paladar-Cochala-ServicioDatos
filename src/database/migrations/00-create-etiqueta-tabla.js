@@ -2,25 +2,21 @@
 
 module.exports = {
     up: async(queryInterface, Sequelize) => {
-        return queryInterface.createTable('Comentarios', {
+        return queryInterface.createTable('Etiquetas', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
                 allowNull: false
             },
-            descripcion: {
+            nombreEtiqueta: {
                 type: Sequelize.STRING,
-                allowNull: false
+                allowNull: true
             },
-            RestauranteId: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            }
         })
     },
 
     down: async(queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Comentarios');
+        return queryInterface.dropTable('Etiquetas');
     }
 };

@@ -3,10 +3,9 @@
 module.exports = {
     up: async(queryInterface, Sequelize) => {
         return queryInterface.createTable('Usuarios', {
-            id: {
-                type: Sequelize.INTEGER,
+            email: {
+                type: Sequelize.STRING,
                 primaryKey: true,
-                autoIncrement: true,
                 allowNull: false
             },
             nickname: {
@@ -17,29 +16,22 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            esAdmin: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false
-            },
-            contrasenia: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            correo: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            estadoCuenta: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
             contadorComentario: {
                 type: Sequelize.INTEGER,
                 allowNull: true
             },
-            imagenPerfil: {
+            urlImagenPerfil: {
                 type: Sequelize.STRING,
                 allowNull: true
+            },
+            esAdmin: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
+            },
+            estaActivo: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false
             }
         })
     },
@@ -47,4 +39,4 @@ module.exports = {
     down: async(queryInterface, Sequelize) => {
         return queryInterface.dropTable('Usuarios');
     }
-}
+};
